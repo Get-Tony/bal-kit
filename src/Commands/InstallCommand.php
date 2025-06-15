@@ -188,10 +188,54 @@ class InstallCommand extends Command
     {
         $this->info('⚡ Installing Livewire...');
 
-        $this->runProcess('composer require livewire/livewire');
+        // Check if Livewire is already installed
+        if ($this->files->exists(base_path('composer.json'))) {
+            $composerJson = json_decode($this->files->get(base_path('composer.json')), true);
+            $hasLivewire = isset($composerJson['require']['livewire/livewire']);
 
-        if (config('bal-kit.livewire.publish_config', true)) {
-            $this->call('livewire:publish', ['--config' => true]);
+            if (!$hasLivewire) {
+                $this->info('📦 Installing Livewire package...');
+                $this->runProcess('composer require livewire/livewire');
+
+                // Clear and rediscover commands to make livewire commands available
+                $this->info('🔄 Refreshing Laravel command cache...');
+                $this->call('config:clear');
+                $this->call('package:discover');
+
+                // Give Laravel a moment to register the new commands
+                sleep(1);
+            } else {
+                $this->info('✅ Livewire already installed');
+            }
+        } else {
+            // Fallback if composer.json doesn't exist
+            $this->runProcess('composer require livewire/livewire');
+            $this->info('🔄 Refreshing Laravel command cache...');
+            $this->call('config:clear');
+            $this->call('package:discover');
+
+            // Give Laravel a moment to register the new commands
+            sleep(1);
+        }
+
+        // Now publish Livewire config if needed
+        try {
+            // Check if livewire commands are available
+            $availableCommands = array_keys($this->getApplication()->all());
+            $livewireCommands = array_filter($availableCommands, function($cmd) {
+                return strpos($cmd, 'livewire:') === 0;
+            });
+
+            if (count($livewireCommands) > 0) {
+                $this->info('📋 Publishing Livewire configuration...');
+                $this->call('livewire:publish', ['--config' => true]);
+            } else {
+                $this->warn('⚠️  Livewire commands not yet available. You can publish config manually:');
+                $this->line('  php artisan livewire:publish --config');
+            }
+        } catch (\Exception $e) {
+            $this->warn('⚠️  Could not publish Livewire config. You can run it manually:');
+            $this->line('  php artisan livewire:publish --config');
         }
 
         $this->info('✅ Livewire installed');

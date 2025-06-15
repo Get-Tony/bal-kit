@@ -42,6 +42,15 @@ npm install && npm run dev
 php artisan serve
 ```
 
+### 🔧 Requirements
+
+- **Laravel 10+ or 12+**
+- **PHP 8.2+**
+- **Node.js 18+** and **NPM**
+- **Composer 2.0+**
+
+> **Note:** BAL Kit automatically installs and configures all required dependencies including Livewire, Bootstrap, and Alpine.js. No manual dependency installation is required.
+
 ## 📦 Installation Options
 
 ### Preset Installations
@@ -435,9 +444,10 @@ If Alpine.js components aren't working:
 ### Common Issues
 
 - **`npm run dev` fails**: Ensure you're in the Laravel project directory, not the package root
-- **Missing Livewire commands**: Run `composer require livewire/livewire` if not automatically installed
+- **Missing Livewire commands**: BAL Kit v1.2.1+ automatically handles Livewire installation. If you encounter issues, run `composer require livewire/livewire` manually first
 - **Permission errors**: Ensure proper directory permissions for `resources/` and `public/` directories
 - **Components not found**: Make sure you've run `php artisan bal:install` with the appropriate preset
+- **Livewire installation fails**: If you get "There are no commands defined in the 'livewire' namespace", this is fixed in v1.2.1+. For older versions, install Livewire manually first: `composer require livewire/livewire`
 
 ## 📄 License & Commercial Use
 

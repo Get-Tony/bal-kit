@@ -46,3 +46,4 @@ yarn-error.log*
 
 # Local testing directories
 local_only_*
+local_test_*

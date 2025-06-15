@@ -5,6 +5,32 @@ All notable changes to BAL Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2025-01-15
+
+### Fixed
+
+- **Critical: Livewire Installation Issue**: Fixed "There are no commands defined in the 'livewire' namespace" error
+  - Added proper package discovery after Livewire installation via Composer
+  - Implemented check for existing Livewire installation to prevent duplicate installs
+  - Added graceful error handling with manual installation instructions
+  - Enhanced installation process with `config:clear` and `package:discover` commands
+- **Documentation**: Updated README with better troubleshooting section for Livewire issues
+- **SASS Warnings**: Added explanatory comments about Bootstrap 5.3+ deprecation warnings
+  - Clarified that warnings come from Bootstrap itself, not BAL Kit
+  - Added note that warnings don't affect functionality
+
+### Enhanced
+
+- **Installation Reliability**: More robust dependency installation process
+- **Error Handling**: Better error messages and recovery instructions
+- **User Experience**: Clearer feedback during installation process
+
+### Technical Improvements
+
+- **Dependency Management**: Improved Composer package detection and installation
+- **Command Discovery**: Automatic Laravel command cache clearing after package installation
+- **Error Recovery**: Fallback instructions for manual installation when automated process fails
+
 ## [1.2.0] - 2025-01-14
 
 ### Added - Complete Starter Kit Features
