@@ -14,8 +14,10 @@ A complete Laravel starter kit with **Bootstrap**, **Alpine.js**, and **Livewire
 
 ### 🆕 **What Makes This Version Special**
 
+- ✅ **Laravel-Native Testing**: Orchestra Testbench integration with 41 automated tests
+- ✅ **Enhanced vendor:publish**: Granular resource publishing with Laravel-standard tags
 - ✅ **Full Preset Fixed**: `--preset=full` now includes authentication automatically (no more manual steps!)
-- ✅ **Fully Tested**: 15 comprehensive tests ensuring reliability
+- ✅ **Comprehensive Testing**: 15 integration tests + 41 unit/feature tests ensuring reliability
 - ✅ **View Caching Fixed**: Resolved Laravel view caching failures
 - ✅ **Complete Authentication**: All auth flows working perfectly
 - ✅ **Air-Gapped Friendly**: No external dependencies (perfect for secure environments)

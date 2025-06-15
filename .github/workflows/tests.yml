@@ -1,0 +1,114 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [8.2, 8.3, 8.4]
+        laravel: [10.*, 11.*, 12.*]
+        dependency-version: [prefer-lowest, prefer-stable]
+        exclude:
+          - laravel: 12.*
+            php: 8.2
+        include:
+          - laravel: 10.*
+            testbench: 8.*
+          - laravel: 11.*
+            testbench: 9.*
+          - laravel: 12.*
+            testbench: 10.*
+
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: xdebug
+
+      - name: Setup problem matchers
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Install dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+
+      - name: List Installed Dependencies
+        run: composer show -D
+
+      - name: Execute tests
+        run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.clover
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+
+  integration-test:
+    runs-on: ubuntu-latest
+    name: Integration Tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Create Laravel Application
+        run: |
+          composer create-project laravel/laravel test-app --prefer-dist --no-interaction
+          cd test-app
+
+      - name: Install BAL Kit
+        run: |
+          cd test-app
+          composer config repositories.local path ../
+          composer require get-tony/bal-kit:@dev --no-interaction
+
+      - name: Test BAL Kit Installation
+        run: |
+          cd test-app
+          php artisan bal:install --preset=full --no-interaction
+          php artisan bal:publish --list
+
+      - name: Test Frontend Build
+        run: |
+          cd test-app
+          npm install
+          npm run build
+
+      - name: Test Application
+        run: |
+          cd test-app
+          php artisan serve --host=127.0.0.1 --port=8000 &
+          sleep 5
+          curl -f http://127.0.0.1:8000 || exit 1
