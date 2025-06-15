@@ -609,6 +609,32 @@ class InstallCommand extends Command
             $this->line('  npm uninstall tailwindcss postcss autoprefixer');
             $this->line('  npm install bootstrap @popperjs/core alpinejs');
         }
+
+        // ALWAYS install BAL Kit components regardless of Breeze success/failure
+        $this->info('🎨 Installing BAL Kit Bootstrap authentication system...');
+
+        // Use guest-layout compatible versions for Breeze
+        $this->copyStub('auth/login-guest.blade.php', resource_path('views/auth/login.blade.php'));
+        $this->copyStub('auth/register-guest.blade.php', resource_path('views/auth/register.blade.php'));
+        $this->copyStub('auth/forgot-password.blade.php', resource_path('views/auth/forgot-password.blade.php'));
+        $this->copyStub('auth/reset-password.blade.php', resource_path('views/auth/reset-password.blade.php'));
+
+        // Install air-gapped guest layout (no external fonts) - FORCE OVERWRITE
+        $this->info('🔄 Installing air-gapped guest layout...');
+        $this->copyStub('layouts/guest.blade.php', resource_path('views/layouts/guest.blade.php'));
+
+        // Create auth-layout component for authentication views
+        $this->copyStub('layouts/auth.blade.php', resource_path('views/components/auth-layout.blade.php'));
+
+        // CRITICAL: Force replace app layout (Breeze overwrites it)
+        $this->info('🔄 Ensuring BAL Kit app layout is properly installed...');
+        $this->copyStub('layouts/app.blade.php', resource_path('views/layouts/app.blade.php'));
+
+        // CRITICAL: Install BAL Kit Bootstrap components LAST to override Breeze Tailwind components
+        $this->info('🔄 Installing BAL Kit Bootstrap components (overriding Breeze Tailwind)...');
+        $this->installBootstrapComponents();
+
+        $this->info('✅ Complete authentication system installed');
     }
 
     /**
