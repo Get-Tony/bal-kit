@@ -120,6 +120,8 @@ npm run bal:preview                   # Preview production build
 
 ### Alpine.js Components
 
+BAL Kit includes pre-built Alpine.js components that work seamlessly with Bootstrap:
+
 ```html
 <!-- Modal Component -->
 <div x-data="balModal()">
@@ -156,19 +158,38 @@ npm run bal:preview                   # Preview production build
         <div x-show="isActive(1)" class="tab-pane">Content 2</div>
     </div>
 </div>
+
+<!-- Dropdown Component -->
+<div x-data="balDropdown()">
+    <button @click="toggle()" class="btn btn-secondary">
+        Dropdown <i class="bi bi-chevron-down"></i>
+    </button>
+    <div x-show="open" @click.away="close()" class="dropdown-menu show">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+    </div>
+</div>
 ```
 
 ### JavaScript Utilities
+
+BAL Kit provides ready-to-use JavaScript utilities:
 
 ```javascript
 // Toast notifications
 BalKit.toast('Success message!', 'success');
 BalKit.toast('Error occurred!', 'error');
+BalKit.toast('Warning message', 'warning');
+BalKit.toast('Info message', 'info');
 
 // Confirm dialogs
 const confirmed = await BalKit.confirm('Are you sure?', 'Delete Item');
 if (confirmed) {
     // User clicked confirm
+    console.log('User confirmed the action');
+} else {
+    // User clicked cancel
+    console.log('User cancelled the action');
 }
 ```
 
@@ -176,6 +197,8 @@ if (confirmed) {
 
 ```php
 // Example Livewire component using Bootstrap
+use Livewire\Component;
+
 class ContactForm extends Component
 {
     public string $name = '';
@@ -205,7 +228,7 @@ class ContactForm extends Component
 
 ## 🎛️ Configuration
 
-The configuration file `config/bal-kit.php` allows you to customize:
+The configuration file `config/bal-kit.php` allows customization of installation options:
 
 ```php
 return [
@@ -231,7 +254,11 @@ return [
         ],
     ],
 
-    // More configuration options...
+    'paths' => [
+        'sass' => 'resources/sass',
+        'js' => 'resources/js',
+        'views' => 'resources/views',
+    ],
 ];
 ```
 
@@ -250,7 +277,8 @@ your-laravel-app/
 │   │   ├── vendors/            # Bootstrap customizations
 │   │   └── app.scss            # Main SASS entry point
 │   ├── js/
-│   │   └── app.js              # Main JavaScript entry point
+│   │   ├── app.js              # Main JavaScript entry point
+│   │   └── bootstrap.js        # Bootstrap configuration
 │   └── views/
 │       └── layouts/
 │           └── app.blade.php   # Main application layout
@@ -271,11 +299,14 @@ your-laravel-app/
 $primary: #your-brand-color;
 $font-family-sans-serif: 'Your Font', system-ui, sans-serif;
 
+// Override Bootstrap variables before importing
+$enable-rounded: false;
+$enable-shadows: true;
+
 // resources/sass/vendors/_bootstrap.scss
-// Import only the Bootstrap components you need
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-// ... customize as needed
+// Import Bootstrap with your customizations
+@import 'abstracts/variables';
+@import '~bootstrap/scss/bootstrap';
 ```
 
 ### JavaScript Customization
@@ -285,11 +316,16 @@ $font-family-sans-serif: 'Your Font', system-ui, sans-serif;
 // Add your own Alpine.js components
 Alpine.data('yourComponent', () => ({
     // Your component logic
+    message: 'Hello World',
+    toggle() {
+        this.message = this.message === 'Hello World' ? 'Goodbye World' : 'Hello World';
+    }
 }));
 
 // Extend BalKit utilities
-BalKit.yourUtility = function() {
+BalKit.yourUtility = function(param) {
     // Your utility function
+    console.log('Custom utility called with:', param);
 };
 ```
 
@@ -306,42 +342,47 @@ BalKit.yourUtility = function() {
 
 If `php artisan bal:install --preset=full` fails with Breeze errors:
 
-1. **Option 1**: Install Breeze manually first:
+**Option 1**: Install Breeze manually first:
 
-   ```bash
-   composer require laravel/breeze --dev
-   php artisan breeze:install blade
-   php artisan bal:install --preset=standard
-   ```
-
-2. **Option 2**: Use the standard preset and add auth manually:
-
-   ```bash
-   php artisan bal:install --preset=standard
-   php artisan bal:install --auth
-   ```
-
-### SASS Deprecation Warnings
-
-The build warnings about `@import` are cosmetic and don't affect functionality. They come from Bootstrap's internal SASS files and will be resolved in future Bootstrap versions.
-
-To minimize warnings in your custom SASS files, use `@use` instead of `@import`:
-
-```scss
-// ✅ Modern syntax
-@use 'abstracts/variables';
-@use 'vendors/bootstrap';
-
-// ❌ Deprecated syntax
-@import 'abstracts/variables';
-@import 'vendors/bootstrap';
+```bash
+composer require laravel/breeze --dev
+php artisan breeze:install blade
+php artisan bal:install --preset=standard
 ```
+
+**Option 2**: Use the standard preset and add auth manually:
+
+```bash
+php artisan bal:install --preset=standard
+php artisan bal:install --auth
+```
+
+### SASS Compilation
+
+BAL Kit uses modern SASS syntax that's compatible with Bootstrap. If you encounter compilation errors:
+
+```bash
+# Ensure all dependencies are installed
+npm install
+
+# Clear any cached builds
+npm run build
+```
+
+### JavaScript Components Not Working
+
+If Alpine.js components aren't working:
+
+1. **Check if Alpine is loaded**: Open browser console and type `Alpine`
+2. **Verify app.js is imported**: Check your main layout includes `@vite(['resources/js/app.js'])`
+3. **Rebuild assets**: Run `npm run dev` or `npm run build`
 
 ### Common Issues
 
 - **`npm run dev` fails**: Ensure you're in the Laravel project directory, not the package root
 - **Missing Livewire commands**: Run `composer require livewire/livewire` if not automatically installed
 - **Permission errors**: Ensure proper directory permissions for `resources/` and `public/` directories
+- **Components not found**: Make sure you've run `php artisan bal:install` with the appropriate preset
 
 ## 📄 License & Commercial Use
 
@@ -383,8 +424,8 @@ BAL Kit incorporates MIT-licensed components (Laravel, Bootstrap, Alpine.js, Sym
 ## 📚 Documentation
 
 - **[Changelog](CHANGELOG.md)** - Version history and changes
-- **[Release Notes](RELEASE_NOTES.md)** - Detailed information about releases
-- **[Upgrade Guide](UPGRADE.md)** - How to upgrade between versions
+- **[Release Notes](RELEASE_NOTES.md)** - Detailed information about this release
+- **[Installation Guide](UPGRADE.md)** - Complete installation instructions
 - **[License](LICENSE)** - Usage rights and restrictions
 
 ## 🔗 Links
