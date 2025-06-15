@@ -5,7 +5,7 @@
 [![Laravel](https://img.shields.io/badge/Laravel-10%2B%20%7C%2012-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
 
-A modern Laravel starter kit that brings together **Bootstrap**, **Alpine.js**, and **Livewire** - the perfect alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
+A complete Laravel starter kit with **Bootstrap**, **Alpine.js**, and **Livewire** featuring authentication pages, admin dashboard, profile settings, and reusable components - the perfect alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
 
 ## ⚖️ Licensing Notice
 
@@ -80,6 +80,14 @@ php artisan bal:publish --components
 ```
 
 ## 🎯 What You Get
+
+### Complete Starter Kit (v1.2.0+)
+
+- **Authentication Pages** - Professional login, registration, forgot password, and reset forms
+- **Admin Dashboard** - Modern dashboard with statistics cards, charts, activity feeds, and quick actions
+- **Profile Settings** - Multi-tab profile management with personal info, security, notifications, and privacy
+- **Reusable Components** - Professional Blade components (cards, buttons, alerts, modals) with extensive options
+- **Bootstrap Showcase** - Comprehensive demo page with all Bootstrap 5.3+ components and examples
 
 ### Professional UI Foundation
 

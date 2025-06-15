@@ -7,10 +7,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @livewireStyles
@@ -129,7 +125,7 @@
                     <div class="col-md-6 text-md-end">
                         <small class="text-muted">
                             Built with <span class="text-danger">&hearts;</span> using
-                            <a href="#" class="text-decoration-none">BAL Kit</a>
+                            <span class="text-primary fw-semibold">BAL Kit</span>
                         </small>
                     </div>
                 </div>
