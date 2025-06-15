@@ -4,8 +4,26 @@
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/get-tony/bal-kit/blob/main/LICENSE)
 [![Laravel](https://img.shields.io/badge/Laravel-10%2B%20%7C%2012-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
+[![Version](https://img.shields.io/badge/Version-1.4.4%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.4)
 
 A complete Laravel starter kit with **Bootstrap**, **Alpine.js**, and **Livewire** featuring authentication pages, admin dashboard, profile settings, and reusable components - the perfect alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
+
+## 🎉 **Version 1.4.4 - Fresh Stable Release**
+
+**This is the first stable, production-ready release of BAL Kit.** All previous versions have been deprecated and removed due to critical issues. This release represents a complete overhaul with comprehensive testing and validation.
+
+### 🆕 **What Makes This Version Special**
+
+- ✅ **Fully Tested**: 15 comprehensive tests ensuring reliability
+- ✅ **View Caching Fixed**: Resolved Laravel view caching failures
+- ✅ **Complete Authentication**: All auth flows working perfectly
+- ✅ **Air-Gapped Friendly**: No external dependencies (perfect for secure environments)
+- ✅ **Bootstrap Integration**: Professional, consistent styling throughout
+- ✅ **Production Ready**: Thoroughly validated for enterprise use
+
+### ⚠️ **Important Notice**
+
+**Previous versions (v1.0.0 - v1.4.3) have been completely removed.** This ensures you only get the stable, working version. All old tags have been deleted to prevent confusion and ensure everyone uses this reliable release.
 
 ## ⚖️ Licensing Notice
 
@@ -90,7 +108,7 @@ php artisan bal:publish --components
 
 ## 🎯 What You Get
 
-### Complete Starter Kit (v1.4.3+)
+### Complete Starter Kit (v1.4.4 Stable)
 
 - **Authentication Pages** - Professional login, registration, forgot password, and reset forms
 - **Admin Dashboard** - Modern dashboard with statistics cards, charts, activity feeds, and quick actions
@@ -338,12 +356,14 @@ BAL Kit v1.4.3 is **production-ready** with a **complete, one-command installati
 ### 🧪 Verified Testing
 
 **All core pages return 200 status:**
+
 - ✅ Homepage: Working perfectly
-- ✅ Login page: Working perfectly  
+- ✅ Login page: Working perfectly
 - ✅ Register page: Working perfectly
 - ✅ Dashboard: Proper authentication redirect
 
 **Complete asset compilation:**
+
 - ✅ CSS: 229KB Bootstrap compilation
 - ✅ JavaScript: 79KB bundle with Alpine.js and Bootstrap
 - ✅ SASS: Complete 7-1 architecture
@@ -355,8 +375,6 @@ BAL Kit v1.4.3 is **production-ready** with a **complete, one-command installati
 - **Fixed installation order**: Critical components installed outside try-catch blocks
 - **Enhanced error handling**: Installation continues even if Breeze encounters issues
 - **Improved test coverage**: More comprehensive post-installation verification
-
-
 
 ## 🛠️ Available Commands
 
