@@ -54,7 +54,7 @@ return [
     */
 
     'alpine' => [
-        'version' => '^3.13',
+        'version' => '^3.14',
         'plugins' => [
             // 'intersect',
             // 'persist',
@@ -93,8 +93,6 @@ return [
             'base',
             'components',
             'layout',
-            'pages',
-            'themes',
             'vendors',
         ],
     ],

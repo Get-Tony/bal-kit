@@ -1,16 +1,20 @@
 {
     "name": "get-tony/bal-kit",
-    "version": "1.0.0",
-    "description": "BAL Kit for Laravel - Bootstrap + Alpine + Livewire toolkit with professional UI components",
+    "version": "1.1.0",
+    "description": "BAL Kit for Laravel - Bootstrap + Alpine.js + Livewire toolkit with 7-1 SASS architecture and professional UI components",
     "keywords": [
         "laravel",
         "bootstrap",
         "alpine",
+        "alpinejs",
         "livewire",
+        "sass",
         "kit",
         "ui",
         "components",
-        "starter"
+        "starter",
+        "tall-stack",
+        "frontend"
     ],
     "license": "proprietary",
     "authors": [

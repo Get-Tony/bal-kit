@@ -5,6 +5,39 @@ All notable changes to BAL Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-01-14
+
+### Added
+
+- Complete documentation consistency review and standardization
+- Enhanced command documentation with full option descriptions
+- Improved JavaScript utility documentation with Bootstrap context
+- Added comprehensive application layout feature documentation
+- Better Alpine.js component documentation with proper naming conventions
+
+### Changed
+
+- **BREAKING**: Simplified markdown documentation structure (removed UPGRADE.md and RELEASE_NOTES.md)
+- Updated Alpine.js version to ^3.14 in configuration
+- Improved README.md with more accurate and detailed information
+- Enhanced code examples to match actual implementation
+- Standardized all SASS file headers and documentation
+- Clarified NPM script aliases and Vite integration
+
+### Fixed
+
+- **SASS Configuration**: Removed references to non-existent `pages/` and `themes/` directories
+- **Version Consistency**: Aligned Alpine.js version across all documentation
+- **Command Documentation**: Ensured all command options are properly documented
+- **Code Examples**: All examples now use actual function names and components
+- **Configuration Examples**: Match real config file structure
+
+### Removed
+
+- UPGRADE.md (installation instructions consolidated into README.md)
+- RELEASE_NOTES.md (release information consolidated into CHANGELOG.md)
+- Redundant documentation that required maintaining same information across multiple files
+
 ## [1.0.0] - 2025-01-14
 
 ### Added

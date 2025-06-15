@@ -28,7 +28,7 @@ You may NOT:
 
 COMMERCIAL USE
 Any commercial use of this software requires a separate commercial license.
-Contact <get-tony@outlook.com> for licensing inquiries.
+For commercial licensing inquiries, please contact: <get-tony@outlook.com>
 
 THIRD-PARTY COMPONENTS
 This software incorporates open-source components licensed under the MIT License:
@@ -42,6 +42,12 @@ This software incorporates open-source components licensed under the MIT License
 
 The use of these components is governed by their respective licenses, which
 are included in the vendor directory when installed via Composer.
+
+DATA PROTECTION
+This software complies with applicable data protection regulations including
+the General Data Protection Regulation (GDPR) where applicable. Users are
+responsible for ensuring their own compliance with applicable data protection
+laws when using this software.
 
 DISCLAIMER OF WARRANTY
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
@@ -66,8 +72,17 @@ destroy all copies in your possession.
 
 GOVERNING LAW
 This license shall be governed by and construed in accordance with the laws
-of [Your Jurisdiction], without regard to its conflict of law provisions.
+of the Federal Republic of Germany, without regard to its conflict of law
+provisions. Any disputes arising under this license shall be subject to the
+exclusive jurisdiction of the German courts.
 
-For commercial licensing inquiries, please contact:
+SOFTWARE VERSION
+This license applies to BAL Kit v1.1.0 and all subsequent versions unless
+otherwise specified.
+
+CONTACT INFORMATION
+For commercial licensing inquiries, support, or questions about this license:
+
 Anthony Pagan
 Email: <get-tony@outlook.com>
+Project: <https://github.com/get-tony/bal-kit>

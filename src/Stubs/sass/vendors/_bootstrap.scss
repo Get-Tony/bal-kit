@@ -1,9 +1,9 @@
 // -----------------------------------------------------------------------------
-// This file contains Bootstrap imports and customizations for BAL Kit
+// Bootstrap imports and customizations for BAL Kit
 // -----------------------------------------------------------------------------
 
 // Bootstrap 5 Configuration
-// Using @import syntax for better compatibility
+// Complete Bootstrap import with BAL Kit customizations
 
 // Import Bootstrap - customize as needed for your project
 @import "~bootstrap/scss/bootstrap";
@@ -50,6 +50,7 @@
 // @import "~bootstrap/scss/utilities/api";
 
 // BAL Kit Bootstrap Customizations
+// Enhanced styles for cards, buttons, and form controls
 .bal-kit {
   // Custom styles that work with Bootstrap
 

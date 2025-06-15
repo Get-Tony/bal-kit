@@ -98,32 +98,57 @@ php artisan bal:publish --components
 
 ### Laravel Integration
 
-- **Professional layouts** - Application and authentication layouts
-- **Flash message handling** - Bootstrap alert styling
-- **Authentication scaffolding** - Bootstrap-styled auth forms
+- **Professional layouts** - Application layout with Bootstrap navbar, flash messages, and footer
+- **Flash message handling** - Automatic Bootstrap alert styling for session feedback
+- **Authentication scaffolding** - Bootstrap-styled auth forms with Laravel Breeze integration
 - **Organized structure** - Livewire components with clear organization
+- **Vite configuration** - Optimized build setup with Bootstrap alias and hot reload
 
 ## 🛠️ Available Commands
 
 ```bash
 # Installation and setup
 php artisan bal:install [options]     # Install BAL Kit components
+  --bootstrap                          # Install Bootstrap CSS framework
+  --alpine                             # Install Alpine.js
+  --livewire                           # Install Livewire
+  --sass                               # Setup SASS with 7-1 architecture
+  --auth                               # Install authentication scaffolding
+  --preset=minimal|standard|full       # Use preset configuration
+  --force                              # Overwrite existing files
+
 php artisan bal:publish [options]     # Publish resources
+  --config                             # Publish configuration file
+  --stubs                              # Publish stub files
+  --components                         # Publish example components
+  --all                                # Publish all resources
+  --force                              # Overwrite existing files
 
 # NPM scripts (added to package.json)
-npm run bal:dev                       # Start development server
+npm run bal:dev                       # Start development server with hot reload
 npm run bal:build                     # Build for production
 npm run bal:preview                   # Preview production build
 ```
 
 ## 🎨 Usage Examples
 
+### Application Layout Features
+
+The main application layout (`resources/views/layouts/app.blade.php`) includes:
+
+- **Responsive Bootstrap navbar** with authentication links
+- **Automatic flash message display** for success, error, and validation messages
+- **Professional footer** with BAL Kit branding
+- **Flexible content slot** supporting both `$slot` and `$content` variables
+- **Livewire integration** with `@livewireStyles` and `@livewireScripts`
+- **Vite asset loading** with automatic SASS and JS compilation
+
 ### Alpine.js Components
 
 BAL Kit includes pre-built Alpine.js components that work seamlessly with Bootstrap:
 
 ```html
-<!-- Modal Component -->
+<!-- Modal Component (uses balModal Alpine component) -->
 <div x-data="balModal()">
     <button @click="open()" class="btn btn-primary">Open Modal</button>
 
@@ -142,7 +167,7 @@ BAL Kit includes pre-built Alpine.js components that work seamlessly with Bootst
     </div>
 </div>
 
-<!-- Tabs Component -->
+<!-- Tabs Component (uses balTabs Alpine component) -->
 <div x-data="balTabs(0)">
     <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -159,7 +184,7 @@ BAL Kit includes pre-built Alpine.js components that work seamlessly with Bootst
     </div>
 </div>
 
-<!-- Dropdown Component -->
+<!-- Dropdown Component (uses balDropdown Alpine component) -->
 <div x-data="balDropdown()">
     <button @click="toggle()" class="btn btn-secondary">
         Dropdown <i class="bi bi-chevron-down"></i>
@@ -176,13 +201,13 @@ BAL Kit includes pre-built Alpine.js components that work seamlessly with Bootst
 BAL Kit provides ready-to-use JavaScript utilities:
 
 ```javascript
-// Toast notifications
+// Toast notifications with Bootstrap styling
 BalKit.toast('Success message!', 'success');
 BalKit.toast('Error occurred!', 'error');
 BalKit.toast('Warning message', 'warning');
 BalKit.toast('Info message', 'info');
 
-// Confirm dialogs
+// Confirm dialogs using Bootstrap modals
 const confirmed = await BalKit.confirm('Are you sure?', 'Delete Item');
 if (confirmed) {
     // User clicked confirm
@@ -246,11 +271,16 @@ return [
         'include_popper' => true,
     ],
 
+    'alpine' => [
+        'version' => '^3.14',
+        'plugins' => [],
+    ],
+
     'sass' => [
         'architecture' => '7-1',
         'directories' => [
             'abstracts', 'base', 'components',
-            'layout', 'pages', 'themes', 'vendors'
+            'layout', 'vendors'
         ],
     ],
 
@@ -258,6 +288,13 @@ return [
         'sass' => 'resources/sass',
         'js' => 'resources/js',
         'views' => 'resources/views',
+        'components' => 'app/Livewire',
+    ],
+
+    'presets' => [
+        'minimal' => ['bootstrap' => true, 'alpine' => true],
+        'standard' => ['bootstrap' => true, 'alpine' => true, 'livewire' => true, 'sass' => true],
+        'full' => ['bootstrap' => true, 'alpine' => true, 'livewire' => true, 'sass' => true, 'auth' => true],
     ],
 ];
 ```
@@ -273,8 +310,8 @@ your-laravel-app/
 │   │   ├── abstracts/          # Variables, mixins, functions
 │   │   ├── base/               # Reset, typography, base styles
 │   │   ├── components/         # Component-specific styles
-│   │   ├── layout/             # Layout-related styles
-│   │   ├── vendors/            # Bootstrap customizations
+│   │   ├── layout/             # Header, footer, sidebar, forms
+│   │   ├── vendors/            # Bootstrap imports and customizations
 │   │   └── app.scss            # Main SASS entry point
 │   ├── js/
 │   │   ├── app.js              # Main JavaScript entry point
@@ -297,36 +334,46 @@ your-laravel-app/
 ```scss
 // resources/sass/abstracts/_variables.scss
 $primary: #your-brand-color;
-$font-family-sans-serif: 'Your Font', system-ui, sans-serif;
+$text-font-stack: 'Your Font', system-ui, sans-serif;
 
-// Override Bootstrap variables before importing
-$enable-rounded: false;
-$enable-shadows: true;
+// Override BAL Kit variables
+$brand-color: rgb(229, 0, 80);
+$max-width: 1200px;
 
 // resources/sass/vendors/_bootstrap.scss
-// Import Bootstrap with your customizations
-@import 'abstracts/variables';
-@import '~bootstrap/scss/bootstrap';
+// Bootstrap is imported with BAL Kit customizations
+@import "~bootstrap/scss/bootstrap";
+
+// BAL Kit customizations are applied in .bal-kit wrapper
+.bal-kit {
+  // Your additional customizations here
+}
 ```
 
 ### JavaScript Customization
 
 ```javascript
 // resources/js/app.js
-// Add your own Alpine.js components
-Alpine.data('yourComponent', () => ({
-    // Your component logic
-    message: 'Hello World',
-    toggle() {
-        this.message = this.message === 'Hello World' ? 'Goodbye World' : 'Hello World';
-    }
-}));
+// Add your own Alpine.js components to the alpine:init event
+document.addEventListener('alpine:init', () => {
+    Alpine.data('yourComponent', () => ({
+        // Your component logic
+        message: 'Hello World',
+        toggle() {
+            this.message = this.message === 'Hello World' ? 'Goodbye World' : 'Hello World';
+        }
+    }));
+});
 
 // Extend BalKit utilities
 BalKit.yourUtility = function(param) {
     // Your utility function
     console.log('Custom utility called with:', param);
 };
+
+// Available BalKit utilities:
+// BalKit.toast(message, type) - Show Bootstrap toast notifications
+// BalKit.confirm(message, title) - Show Bootstrap confirmation modal
 ```
 
 ## 🧪 Requirements
@@ -424,8 +471,6 @@ BAL Kit incorporates MIT-licensed components (Laravel, Bootstrap, Alpine.js, Sym
 ## 📚 Documentation
 
 - **[Changelog](CHANGELOG.md)** - Version history and changes
-- **[Release Notes](RELEASE_NOTES.md)** - Detailed information about this release
-- **[Installation Guide](UPGRADE.md)** - Complete installation instructions
 - **[License](LICENSE)** - Usage rights and restrictions
 
 ## 🔗 Links
