@@ -581,13 +581,15 @@ class InstallCommand extends Command
 
                         // Replace Breeze authentication views with BAL Kit Bootstrap versions
             $this->info('🎨 Installing BAL Kit Bootstrap authentication views...');
-            $this->copyStub('auth/login.blade.php', resource_path('views/auth/login.blade.php'));
-            $this->copyStub('auth/register.blade.php', resource_path('views/auth/register.blade.php'));
+
+            // Use guest-layout compatible versions for Breeze
+            $this->copyStub('auth/login-guest.blade.php', resource_path('views/auth/login.blade.php'));
+            $this->copyStub('auth/register-guest.blade.php', resource_path('views/auth/register.blade.php'));
             $this->copyStub('auth/forgot-password.blade.php', resource_path('views/auth/forgot-password.blade.php'));
             $this->copyStub('auth/reset-password.blade.php', resource_path('views/auth/reset-password.blade.php'));
 
-            // Replace guest layout with auth layout
-            $this->copyStub('layouts/auth.blade.php', resource_path('views/layouts/guest.blade.php'));
+            // Install air-gapped guest layout (no external fonts)
+            $this->copyStub('layouts/guest.blade.php', resource_path('views/layouts/guest.blade.php'));
 
             // Create auth-layout component for authentication views
             $this->copyStub('layouts/auth.blade.php', resource_path('views/components/auth-layout.blade.php'));
@@ -821,53 +823,17 @@ class InstallCommand extends Command
     {
         $this->comment('🧩 Installing Bootstrap Blade components...');
 
-        // Create the component files with Bootstrap styling
+        // Copy Bootstrap component stubs
         $components = [
-            'input-label.blade.php' => '@props([\'for\' => null, \'value\' => null])
-
-<label {{ $attributes->merge([\'class\' => \'form-label\', \'for\' => $for]) }}>
-    {{ $value ?? $slot }}
-</label>',
-
-            'text-input.blade.php' => '@props([\'disabled\' => false, \'type\' => \'text\'])
-
-<input type="{{ $type }}" @disabled($disabled) {{ $attributes->merge([\'class\' => \'form-control\']) }}>',
-
-            'input-error.blade.php' => '@props([\'messages\'])
-
-@if ($messages)
-    <ul {{ $attributes->merge([\'class\' => \'invalid-feedback d-block list-unstyled mb-0\']) }}>
-        @foreach ((array) $messages as $message)
-            <li>{{ $message }}</li>
-        @endforeach
-    </ul>
-@endif',
-
-            'primary-button.blade.php' => '<button {{ $attributes->merge([\'type\' => \'submit\', \'class\' => \'btn btn-primary\']) }}>
-    {{ $slot }}
-</button>',
-
-            'secondary-button.blade.php' => '<button {{ $attributes->merge([\'type\' => \'button\', \'class\' => \'btn btn-outline-secondary\']) }}>
-    {{ $slot }}
-</button>',
-
-            'danger-button.blade.php' => '<button {{ $attributes->merge([\'type\' => \'button\', \'class\' => \'btn btn-danger\']) }}>
-    {{ $slot }}
-</button>',
-
-            'auth-session-status.blade.php' => '@props([\'status\'])
-
-@if ($status)
-    <div {{ $attributes->merge([\'class\' => \'alert alert-success\']) }}>
-        {{ $status }}
-    </div>
-@endif'
+            'text-input.blade.php',
+            'input-label.blade.php',
+            'input-error.blade.php',
+            'primary-button.blade.php',
+            'auth-session-status.blade.php'
         ];
 
-        foreach ($components as $filename => $content) {
-            $path = resource_path("views/components/{$filename}");
-            $this->files->ensureDirectoryExists(dirname($path));
-            $this->files->put($path, $content);
+        foreach ($components as $component) {
+            $this->copyStub("components/{$component}", resource_path("views/components/{$component}"));
         }
 
         $this->info('✅ Bootstrap components installed');

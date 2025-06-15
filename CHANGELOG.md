@@ -5,6 +5,97 @@ All notable changes to BAL Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2025-06-15
+
+### 🚀 MAJOR RELEASE: Complete Air-Gapped Authentication System
+
+This release addresses all fundamental issues identified in BAL Kit's authentication system and makes it truly production-ready for air-gapped environments.
+
+### ✅ Fixed - Critical Authentication Issues
+
+- **BREAKING: Removed Confusing Authentication Prompt**: Eliminated the misleading "Install Laravel Breeze?" question
+  - Authentication installation is now automatic and transparent
+  - Clear messaging: "Installing complete authentication system..."
+  - No more user confusion about what BAL Kit provides
+- **Complete Authentication System**: Fixed incomplete authentication implementation
+  - All authentication pages now work correctly (login, register, password reset)
+  - Proper Bootstrap component integration throughout auth flow
+  - Guest layout properly configured for authentication pages
+- **Air-Gapped Environment Support**: Removed all external dependencies
+  - Eliminated Google Fonts and external font dependencies
+  - Uses system fonts for complete offline compatibility
+  - Perfect for secure, isolated, or air-gapped environments
+- **Bootstrap Component Integration**: Fixed Tailwind/Bootstrap conflicts
+  - All Blade components now use proper Bootstrap classes
+  - Consistent styling across authentication and application pages
+  - No more mixed Tailwind/Bootstrap styling issues
+
+### 🎯 Added - New Features
+
+- **Air-Gapped Guest Layout**: New `layouts/guest.blade.php` stub with no external dependencies
+- **Complete Bootstrap Component Library**:
+  - `text-input.blade.php` - Bootstrap form controls
+  - `input-label.blade.php` - Proper form labels
+  - `input-error.blade.php` - Bootstrap validation feedback
+  - `primary-button.blade.php` - Bootstrap button styling
+  - `auth-session-status.blade.php` - Bootstrap alert integration
+- **Breeze-Compatible Authentication Views**:
+  - `auth/login-guest.blade.php` - Guest layout login form
+  - `auth/register-guest.blade.php` - Guest layout registration form
+  - Full compatibility with Laravel Breeze expectations
+- **Enhanced Installation Process**:
+  - Automatic component installation and replacement
+  - Proper Vite configuration for SASS compilation
+  - Complete asset pipeline setup
+  - Post-installation verification tests
+
+### 🔧 Enhanced - Installation & UX
+
+- **Transparent Installation**: No confusing prompts or choices
+  - Users get complete authentication automatically
+  - Clear progress messages throughout installation
+  - Honest documentation about what's included
+- **Improved Error Handling**: Better installation reliability
+  - Automatic detection and fixing of common issues
+  - Comprehensive post-installation testing
+  - Clear error messages and recovery instructions
+- **Documentation Updates**: Accurate and honest marketing
+  - Removed misleading claims about authentication completeness
+  - Added air-gapped environment focus
+  - Clear explanation of what BAL Kit actually provides
+
+### 🛠️ Technical Improvements
+
+- **Installation Command Enhancements**:
+  - Updated `installBreezeAuth()` method for proper component handling
+  - Enhanced `installBootstrapComponents()` to use stub files
+  - Improved post-installation verification tests
+  - Better error recovery and user guidance
+- **Component Architecture**: Modular, reusable Bootstrap components
+- **Asset Pipeline**: Proper SASS compilation with Bootstrap integration
+- **Layout System**: Consistent, air-gapped friendly layouts
+
+### 📋 Migration Guide
+
+**From v1.3.x to v1.4.0:**
+
+1. **No Breaking Changes for End Users**: Existing installations continue to work
+2. **New Installations**: Get improved authentication automatically
+3. **Air-Gapped Environments**: Now fully supported out of the box
+4. **Authentication**: No more confusing prompts during installation
+
+### 🎉 Result
+
+BAL Kit v1.4.0 delivers on its promise of being a complete Bootstrap + Alpine.js + Livewire starter kit:
+
+- ✅ **Complete authentication** that actually works
+- ✅ **Air-gapped friendly** with no external dependencies
+- ✅ **Professional Bootstrap styling** throughout
+- ✅ **Transparent installation** with no user confusion
+- ✅ **Production ready** for secure environments
+
+**Perfect for**: Enterprise environments, air-gapped systems, secure deployments, and developers who want a truly complete Laravel starter kit.
+
 ## [1.2.1] - 2025-01-15
 
 ### Fixed

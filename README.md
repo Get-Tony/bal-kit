@@ -236,7 +236,7 @@ Use it in your blade file:
 
 - **Professional layouts** - Application layout with Bootstrap navbar, flash messages, and footer
 - **Flash message handling** - Automatic Bootstrap alert styling for session feedback
-- **Complete authentication system** - Laravel Breeze with beautiful Bootstrap styling (no Tailwind)
+- **Complete authentication system** - Laravel Breeze with beautiful Bootstrap styling (air-gapped friendly)
 - **Organized structure** - Livewire components with clear organization
 - **Vite configuration** - Optimized build setup with Bootstrap alias and hot reload
 
@@ -529,8 +529,9 @@ BAL Kit provides a **complete authentication system** using Laravel Breeze with 
 
 1. **Laravel Breeze** - Complete authentication backend (controllers, middleware, routes)
 2. **Bootstrap styling** - Replaces all Tailwind components with Bootstrap equivalents
-3. **Professional UI** - Beautiful, responsive authentication forms and layouts
-4. **Complete functionality** - Login, register, password reset, email verification, 2FA support
+3. **Air-gapped friendly** - No external font dependencies, works in isolated environments
+4. **Professional UI** - Beautiful, responsive authentication forms and layouts
+5. **Complete functionality** - Login, register, password reset, email verification, 2FA support
 
 **Installation is automatic** - no prompts or configuration needed:
 
