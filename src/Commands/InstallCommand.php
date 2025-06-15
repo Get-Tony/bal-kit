@@ -152,6 +152,9 @@ class InstallCommand extends Command
             $this->installAuth();
         }
 
+        // Always copy JavaScript stubs for BAL Kit utilities
+        $this->installJavaScript();
+
         $this->updatePackageJson();
         $this->updateViteConfig();
         $this->createAppLayout();
@@ -495,5 +498,19 @@ class InstallCommand extends Command
         $this->line('  php artisan bal:publish    # Publish additional stubs');
         $this->line('  npm run bal:dev           # Start development server');
         $this->line('  npm run bal:build         # Build for production');
+    }
+
+    /**
+     * Install JavaScript stubs with BAL Kit utilities.
+     */
+    protected function installJavaScript(): void
+    {
+        $this->info('⚡ Setting up BAL Kit JavaScript utilities...');
+
+        // Copy JavaScript stubs
+        $this->copyStub('js/app.js', resource_path('js/app.js'));
+        $this->copyStub('js/bootstrap.js', resource_path('js/bootstrap.js'));
+
+        $this->info('✅ BAL Kit JavaScript utilities installed');
     }
 }
