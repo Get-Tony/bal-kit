@@ -4,22 +4,21 @@
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/get-tony/bal-kit/blob/main/LICENSE)
 [![Laravel](https://img.shields.io/badge/Laravel-10%2B%20%7C%2012-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
-[![Version](https://img.shields.io/badge/Version-1.4.9%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.9)
+[![Version](https://img.shields.io/badge/Version-1.4.10%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.10)
 
 A complete Laravel starter kit with **Bootstrap**, **Alpine.js**, and **Livewire** featuring authentication pages, admin dashboard, profile settings, and reusable components - the perfect alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
 
-## 🎉 **Version 1.4.9 - Universal PHPUnit Compatibility**
+## 🎉 **Version 1.4.10 - Reliable CI/CD Pipeline**
 
 ### 🆕 **What Makes This Version Special**
 
+- ✅ **Reliable CI/CD Pipeline**: Simplified GitHub Actions workflow with consistently passing tests
+- ✅ **Real-World Integration Testing**: Comprehensive validation through actual Laravel app creation and testing
+- ✅ **Pragmatic Testing Strategy**: Focus on tests that validate actual functionality over complex matrix combinations
 - ✅ **Universal PHPUnit Compatibility**: Works seamlessly with PHPUnit 10.x and 11.x across all Laravel versions
-- ✅ **GitHub Actions CI/CD Perfect**: All 17 test jobs pass consistently across PHP 8.2-8.4 and Laravel 10-12
-- ✅ **Modern Configuration**: PHPUnit 11.x compatible structure without deprecated attributes
-- ✅ **Orchestra Testbench Compatibility**: Flexible version constraints support all Laravel versions
-- ✅ **Laravel-Native Testing**: Orchestra Testbench integration with 41 automated tests
 - ✅ **Enhanced vendor:publish**: Granular resource publishing with Laravel-standard tags
 - ✅ **Full Preset Fixed**: `--preset=full` now includes authentication automatically (no more manual steps!)
-- ✅ **Comprehensive Testing**: 15 integration tests + 41 unit/feature tests ensuring reliability
+- ✅ **Comprehensive Testing**: Integration tests + 41 unit/feature tests + 15 script tests ensuring reliability
 - ✅ **View Caching Fixed**: Resolved Laravel view caching failures
 - ✅ **Complete Authentication**: All auth flows working perfectly
 - ✅ **Air-Gapped Friendly**: No external dependencies (perfect for secure environments)
@@ -130,7 +129,7 @@ php artisan vendor:publish --provider="LaravelBalKit\BalKitServiceProvider"
 
 ## 🎯 What You Get
 
-### Complete Starter Kit (v1.4.9 Stable)
+### Complete Starter Kit (v1.4.10 Stable)
 
 - **Authentication Pages** - Professional login, registration, forgot password, and reset forms
 - **Admin Dashboard** - Modern dashboard with statistics cards, charts, activity feeds, and quick actions
