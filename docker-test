@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# BAL Kit Docker Test Wrapper
-# Convenient access to Docker testing functionality
-
-exec "$(dirname "$0")/scripts/docker/docker-test-runner.sh" "$@"

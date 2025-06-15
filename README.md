@@ -4,7 +4,7 @@
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/get-tony/bal-kit/blob/main/LICENSE)
 [![Laravel](https://img.shields.io/badge/Laravel-10%2B%20%7C%2012-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
-[![Version](https://img.shields.io/badge/Version-1.5.0%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.5.0)
+[![Version](https://img.shields.io/badge/Version-1.5.1%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.5.1)
 
 A production-ready Laravel starter kit with **Bootstrap 5**, **Alpine.js**, and **Livewire 3** - the professional alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
 
@@ -100,17 +100,7 @@ php artisan bal:install --preset=full
 
 ## 🧪 Testing & Quality Assurance
 
-### Docker Testing (Recommended)
-
-```bash
-# Complete isolated testing
-./docker-test
-
-# Test specific version
-./docker-test --version "^1.5.0"
-```
-
-### Native Testing
+### Testing
 
 ```bash
 # Run all tests locally
@@ -119,9 +109,10 @@ php artisan bal:install --preset=full
 # Test specific components
 ./test phpunit
 ./test frontend
+./test composer
 ```
 
-**[📋 Complete Testing Guide](docs/testing.md)** - Docker and native testing options
+**[📋 Complete Testing Guide](docs/testing.md)** - Comprehensive testing documentation
 
 ## ⚖️ License & Commercial Use
 
@@ -133,7 +124,7 @@ php artisan bal:install --preset=full
 
 ### ✅ Production Ready (v1.5.0)
 
-- **Docker Testing Environment** - Complete isolation with zero risk
+- **Comprehensive Testing** - Complete test suite for quality assurance
 - **Air-Gapped Friendly** - No external dependencies
 - **Enterprise Security** - Perfect for secure/isolated environments
 - **Universal Compatibility** - Works with Laravel 10+, 11+, 12+
@@ -154,11 +145,11 @@ php artisan bal:install --preset=full
 
 ## 🚀 Version 1.5.0 Highlights
 
-- 🐳 **Docker Testing Environment** - Complete isolation testing
-- 🔒 **Enhanced Security** - Non-root execution, limited permissions
-- 📏 **Consistent Results** - Same environment across all systems
-- ⚡ **Performance Optimized** - tmpfs workspace, cached volumes
-- 🛡️ **CI/CD Ready** - Simplified GitHub Actions workflow
+- 🧪 **Enhanced Testing Suite** - Comprehensive local testing capabilities
+- 🔒 **Enhanced Security** - Secure authentication and validation
+- 📏 **Consistent Code Quality** - Standardized testing across components
+- ⚡ **Performance Optimized** - Fast builds and efficient testing
+- 🛡️ **CI/CD Ready** - Streamlined testing workflow
 
 ## 📞 Support & Resources
 
@@ -166,7 +157,7 @@ php artisan bal:install --preset=full
 
 - **[Complete Documentation](docs/)** - Comprehensive guides
 - **[Installation Guide](docs/installation.md)** - Step-by-step setup
-- **[Testing Guide](docs/testing.md)** - Docker and native testing
+- **[Testing Guide](docs/testing.md)** - Comprehensive testing
 - **[Troubleshooting](docs/troubleshooting.md)** - Common issues
 
 ### 🔗 Links
@@ -177,4 +168,4 @@ php artisan bal:install --preset=full
 
 ---
 
-**Ready to get started?** Check out the [Installation Guide](docs/installation.md) or run `./docker-test` to see BAL Kit in action!
+**Ready to get started?** Check out the [Installation Guide](docs/installation.md) or run `./test` to see BAL Kit in action!

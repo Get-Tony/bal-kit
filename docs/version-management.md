@@ -55,7 +55,7 @@ class Version
     /**
      * Release codename
      */
-    public const CODENAME = 'Docker Testing Environment';
+    public const CODENAME = 'Enhanced Testing Suite';
 
     /**
      * Get formatted version string
@@ -223,7 +223,7 @@ git add .
 git commit -m "Release v1.5.0"
 
 # 4. Create and push tag
-git tag -a v1.5.0 -m "Release v1.5.0 - Docker Testing Environment"
+git tag -a v1.5.0 -m "Release v1.5.0 - Enhanced Testing Suite"
 git push origin v1.5.0
 
 # 5. Packagist automatically detects the new version
@@ -239,10 +239,10 @@ DEFAULT_VERSION=$(php scripts/version/version.php --constraint 2>/dev/null || ec
 VERSION="${DEFAULT_VERSION}"
 ```
 
-### Docker Testing
+### Local Testing
 
 ```bash
-# docker-test-runner.sh reads from central source
+# local-test.sh reads from central source
 get_version() {
     if [ -f "scripts/version/version.php" ]; then
         php scripts/version/version.php --constraint 2>/dev/null || echo "^1.5.0"

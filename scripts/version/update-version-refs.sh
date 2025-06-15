@@ -82,13 +82,14 @@ update_changelog() {
     print_success "CHANGELOG.md checked"
 }
 
-# Update docker-compose.test.yml default
-update_docker_compose() {
-    print_info "Updating docker-compose.test.yml..."
+# Update documentation references
+update_documentation() {
+    print_info "Updating documentation references..."
 
-    sed -i "s|BAL_KIT_VERSION:-\^[0-9]\+\.[0-9]\+\.[0-9]\+|BAL_KIT_VERSION:-${CONSTRAINT}|g" scripts/docker/docker-compose.test.yml
+    # Update any version references in documentation files
+    find docs/ -name "*.md" -exec sed -i "s|version [0-9]\+\.[0-9]\+\.[0-9]\+|version ${VERSION}|gi" {} \;
 
-    print_success "docker-compose.test.yml updated"
+    print_success "Documentation updated"
 }
 
 # Main function
@@ -102,7 +103,7 @@ main() {
 
     update_readme
     update_changelog
-    update_docker_compose
+    update_documentation
 
     echo ""
     echo -e "${GREEN}========================================${NC}"

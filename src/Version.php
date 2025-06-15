@@ -13,12 +13,12 @@ class Version
     /**
      * The current version of BAL Kit.
      */
-    public const VERSION = '1.5.0';
+    public const VERSION = '1.5.1';
 
     /**
      * The version constraint for Composer installations.
      */
-    public const CONSTRAINT = '^1.5.0';
+    public const CONSTRAINT = '^1.5.1';
 
     /**
      * The release date of the current version.
@@ -28,7 +28,7 @@ class Version
     /**
      * The version name/codename.
      */
-    public const CODENAME = 'Docker Testing Environment';
+    public const CODENAME = 'Streamlined Testing';
 
     /**
      * Get the current version.

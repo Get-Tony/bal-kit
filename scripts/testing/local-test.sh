@@ -243,6 +243,18 @@ check_bal_kit_local_source() {
     record_test_pass "Local Source - BAL Kit source code available for testing"
 }
 
+# Check if BAL Kit repository is accessible
+check_bal_kit_repository() {
+    print_info "Checking BAL Kit repository access..."
+
+    # Test if we can reach the repository by trying to get package info
+    if composer show get-tony/bal-kit --available >/dev/null 2>&1; then
+        record_test_pass "Repository - BAL Kit package accessible from repository"
+    else
+        record_test_warning "Repository - Package access check had issues (may still work for installation)"
+    fi
+}
+
 # Test composer dependencies
 test_composer() {
     print_header "Testing Composer Dependencies"
@@ -332,11 +344,18 @@ test_phpunit() {
         record_test_fail "PHPUnit - Unit tests failed"
     fi
 
-    print_info "Running complete test suite with coverage..."
-    if vendor/bin/phpunit --coverage-text >/dev/null 2>&1; then
-        record_test_pass "PHPUnit - Complete test suite with coverage"
+    # Check if coverage drivers are available
+    print_info "Checking for coverage drivers..."
+    if php -m | grep -E "(xdebug|pcov)" >/dev/null 2>&1; then
+        print_info "Running complete test suite with coverage..."
+        if vendor/bin/phpunit --coverage-text >/dev/null 2>&1; then
+            record_test_pass "PHPUnit - Complete test suite with coverage"
+        else
+            record_test_warning "PHPUnit - Coverage generation had issues"
+        fi
     else
-        record_test_warning "PHPUnit - Coverage generation had issues"
+        print_info "No coverage drivers (Xdebug/PCOV) detected, skipping coverage generation..."
+        record_test_pass "PHPUnit - Coverage skipped (no coverage drivers available)"
     fi
 }
 

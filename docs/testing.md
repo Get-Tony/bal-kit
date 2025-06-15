@@ -4,16 +4,16 @@ Comprehensive testing options for BAL Kit development and integration.
 
 ## 🧪 Testing Overview
 
-BAL Kit provides multiple testing approaches to ensure reliability and compatibility:
+BAL Kit provides comprehensive testing approaches to ensure reliability and compatibility:
 
-- **Native Testing**: Direct testing on your local environment
-- **Docker Testing**: Isolated testing in containerized environment
+- **Local Testing**: Direct testing on your local environment
 - **PHPUnit Tests**: Unit and feature tests for the package itself
 - **Integration Testing**: Real-world Laravel application testing
+- **Quality Assurance**: Complete validation of all components
 
 ## 🚀 Quick Testing
 
-### Native Testing (Recommended for Development)
+### Local Testing (Comprehensive Quality Assurance)
 
 ```bash
 # Run all tests
@@ -28,53 +28,12 @@ BAL Kit provides multiple testing approaches to ensure reliability and compatibi
 
 # Test with specific version
 ./test --version "^1.5.0"
+
+# Run with verbose output
+./test --verbose
 ```
 
-### Docker Testing (Recommended for CI/CD)
-
-```bash
-# Run all tests in Docker
-./docker-test
-
-# Run with specific options
-./docker-test --version "^1.5.0"
-./docker-test --help
-```
-
-## 🐳 Docker Testing Environment
-
-### Complete Isolation
-
-Docker testing provides:
-
-- **Zero Risk**: No impact on your local PHP/Composer/Node setup
-- **Consistent Environment**: Same versions across all systems
-- **Security**: Non-root execution with limited permissions
-- **Performance**: tmpfs workspace and cached volumes
-
-### Docker Environment Specifications
-
-- **PHP**: 8.2.28 (with all required extensions)
-- **Composer**: 2.8.9
-- **Node.js**: v18.19.0
-- **NPM**: Latest compatible version
-- **Operating System**: Ubuntu 22.04 LTS
-
-### Docker Commands
-
-```bash
-# Build testing image
-docker-compose -f scripts/docker/docker-compose.test.yml build
-
-# Run tests interactively
-docker-compose -f scripts/docker/docker-compose.test.yml run --rm bal-kit-test
-
-# Clean up Docker resources
-docker-compose -f scripts/docker/docker-compose.test.yml down --volumes
-docker system prune -f
-```
-
-## 🔧 Native Testing Environment
+## 🔧 Local Testing Environment
 
 ### System Requirements
 
@@ -266,7 +225,7 @@ class ConfigurationTest extends TestCase
 
 ### Comprehensive Reports
 
-Both native and Docker testing provide detailed reports:
+Local testing provides detailed reports:
 
 ```
 ========================================
@@ -334,25 +293,7 @@ on:
     branches: [ main ]
 
 jobs:
-  docker-tests:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Run Docker Tests
-      run: |
-        chmod +x docker-test
-        ./docker-test --version "^1.5.0"
-
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: test-results
-        path: test-results/
-
-  native-tests:
+  local-tests:
     runs-on: ubuntu-latest
 
     strategy:
@@ -374,7 +315,7 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Run Native Tests
+    - name: Run Local Tests
       run: |
         chmod +x test
         ./test --version "^1.5.0"
@@ -384,7 +325,7 @@ jobs:
 
 ### Security Audit
 
-Both testing environments include security auditing:
+Local testing environment includes security auditing:
 
 ```bash
 # Composer security audit

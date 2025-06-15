@@ -13,7 +13,7 @@ Complete documentation for the Laravel BAL Kit (Bootstrap + Alpine.js + Livewire
 ### Advanced Topics
 
 - **[Customization Guide](customization.md)** - Modify and extend BAL Kit components
-- **[Testing Guide](testing.md)** - Native and Docker testing environments
+- **[Testing Guide](testing.md)** - Comprehensive local testing environment
 - **[Version Management](version-management.md)** - Centralized version system
 - **[Troubleshooting](troubleshooting.md)** - Common issues and solutions
 
@@ -22,7 +22,7 @@ Complete documentation for the Laravel BAL Kit (Bootstrap + Alpine.js + Livewire
 ### For System Administrators
 
 - [Installation Requirements](installation.md#requirements)
-- [Docker Testing Environment](testing.md#docker-testing-environment)
+- [Local Testing Environment](testing.md#local-testing-environment)
 - [Security Configuration](configuration.md#security-configuration)
 - [Performance Optimization](configuration.md#performance-configuration)
 
@@ -35,7 +35,7 @@ Complete documentation for the Laravel BAL Kit (Bootstrap + Alpine.js + Livewire
 
 ### For DevOps Engineers
 
-- [Docker Testing](testing.md#docker-testing-environment)
+- [Local Testing](testing.md#local-testing-environment)
 - [CI/CD Integration](testing.md#continuous-integration)
 - [Version Management](version-management.md#version-system-overview)
 - [Automated Testing](testing.md#automated-testing)
