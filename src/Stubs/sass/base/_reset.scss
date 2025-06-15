@@ -1,0 +1,62 @@
+// -----------------------------------------------------------------------------
+// This file contains base reset and normalization styles
+// -----------------------------------------------------------------------------
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: $text-font-stack;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: $text-color;
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+// Remove default margins
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+dl, dd, ol, ul, figure, hr,
+fieldset, legend {
+    margin: 0;
+    padding: 0;
+}
+
+// Make images responsive by default
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+// Inherit fonts for inputs and buttons
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+// Remove all animations and transitions for people that prefer not to see them
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

@@ -1,0 +1,36 @@
+// BAL Kit - Main SASS Entry Point
+// Bootstrap + Alpine + Livewire Toolkit
+
+// 1. Configuration and helpers
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+// 2. Vendors
+@import 'vendors/bootstrap';
+
+// 3. Base stuff
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/helpers';
+
+// 4. Layout-related sections
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/sidebar';
+@import 'layout/forms';
+
+// 5. Components
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/navigation';
+@import 'components/modal';
+@import 'components/alerts';
+
+// 6. Page-specific styles
+// Import page-specific styles as needed
+// @import 'pages/home';
+
+// 7. Themes
+// Import theme files as needed
+// @import 'themes/theme';

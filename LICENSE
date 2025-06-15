@@ -1,0 +1,73 @@
+BAL Kit for Laravel - Proprietary License
+Copyright (c) 2025 Anthony Pagan
+
+All Rights Reserved
+
+THE CONTENTS OF THIS PROJECT ARE PROPRIETARY AND CONFIDENTIAL.
+UNAUTHORIZED COPYING, TRANSFERRING OR REPRODUCTION OF THE CONTENTS
+OF THIS PROJECT, VIA ANY MEDIUM IS STRICTLY PROHIBITED.
+
+GRANT OF LICENSE
+Subject to the terms and conditions of this License, the copyright holder
+hereby grants you a limited, non-exclusive, non-transferable license to:
+
+- View and examine the source code for evaluation purposes only
+- Use the software for personal, non-commercial testing and development
+- Fork the repository for the sole purpose of contributing improvements
+  back to the original project
+
+RESTRICTIONS
+You may NOT:
+
+- Use this software in any production environment without explicit written
+  permission from the copyright holder
+- Distribute, sublicense, or sell copies of the software
+- Modify, merge, publish, or create derivative works based on the software
+  for commercial purposes
+- Remove or alter any proprietary notices or labels on the software
+
+COMMERCIAL USE
+Any commercial use of this software requires a separate commercial license.
+Contact <get-tony@outlook.com> for licensing inquiries.
+
+THIRD-PARTY COMPONENTS
+This software incorporates open-source components licensed under the MIT License:
+
+- Laravel Framework (MIT License)
+- Bootstrap (MIT License)
+- Alpine.js (MIT License)
+- Symfony Process Component (MIT License)
+- PHPUnit (BSD-3-Clause License)
+- Orchestra Testbench (MIT License)
+
+The use of these components is governed by their respective licenses, which
+are included in the vendor directory when installed via Composer.
+
+DISCLAIMER OF WARRANTY
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. THE COPYRIGHT
+HOLDER DOES NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE SOFTWARE WILL MEET
+YOUR REQUIREMENTS OR THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED
+OR ERROR-FREE.
+
+LIMITATION OF LIABILITY
+IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE. THIS INCLUDES, WITHOUT LIMITATION, ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES.
+
+TERMINATION
+This license is effective until terminated. Your rights under this license
+will terminate automatically without notice if you fail to comply with any
+terms herein. Upon termination, you must cease all use of the software and
+destroy all copies in your possession.
+
+GOVERNING LAW
+This license shall be governed by and construed in accordance with the laws
+of [Your Jurisdiction], without regard to its conflict of law provisions.
+
+For commercial licensing inquiries, please contact:
+Anthony Pagan
+Email: <get-tony@outlook.com>
