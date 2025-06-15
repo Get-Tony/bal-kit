@@ -535,23 +535,15 @@ class InstallCommand extends Command
      */
     protected function installAuth(): void
     {
-        $this->info('🔐 Installing authentication scaffolding...');
-
-        $this->comment('BAL Kit provides Bootstrap-styled authentication views.');
-        $this->comment('For complete authentication functionality, we recommend Laravel Breeze.');
+        $this->info('🔐 Installing complete authentication system...');
+        $this->comment('BAL Kit provides complete authentication with Bootstrap styling.');
         $this->newLine();
 
-        // Check if user wants Breeze or simple auth templates
-        $useBreeze = $this->confirm('Install Laravel Breeze for complete authentication?', true);
+        // Always install Breeze for complete functionality, but make it transparent
+        $this->comment('Installing Laravel Breeze with Bootstrap styling...');
+        $this->installBreezeAuth();
 
-        if ($useBreeze) {
-            $this->installBreezeAuth();
-        } else {
-            $this->comment('Installing Bootstrap-styled authentication view templates only...');
-            $this->installSimpleAuth();
-        }
-
-        $this->info('✅ Authentication scaffolding installed');
+        $this->info('✅ Complete authentication system installed');
     }
 
     /**

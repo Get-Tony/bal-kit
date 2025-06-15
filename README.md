@@ -236,7 +236,7 @@ Use it in your blade file:
 
 - **Professional layouts** - Application layout with Bootstrap navbar, flash messages, and footer
 - **Flash message handling** - Automatic Bootstrap alert styling for session feedback
-- **Authentication options** - Bootstrap-styled auth forms with optional Laravel Breeze integration for complete functionality
+- **Complete authentication system** - Laravel Breeze with beautiful Bootstrap styling (no Tailwind)
 - **Organized structure** - Livewire components with clear organization
 - **Vite configuration** - Optimized build setup with Bootstrap alias and hot reload
 
@@ -521,37 +521,36 @@ BalKit.yourUtility = function(param) {
 
 ## 🔧 Troubleshooting
 
-### Authentication Installation
+### Authentication System
 
-BAL Kit provides **Bootstrap-styled authentication views** and **recommends Laravel Breeze** for complete authentication functionality.
+BAL Kit provides a **complete authentication system** using Laravel Breeze with beautiful Bootstrap styling.
 
-**Default Behavior**: When you run `php artisan bal:install --preset=full` or `php artisan bal:install --auth`, BAL Kit will:
+**What BAL Kit installs automatically:**
 
-1. **Ask if you want Laravel Breeze** (recommended, default: **YES**)
-   - **YES**: Installs complete authentication with Laravel Breeze + Bootstrap styling
-   - **NO**: Installs only Bootstrap-styled authentication view templates (no controllers/logic)
+1. **Laravel Breeze** - Complete authentication backend (controllers, middleware, routes)
+2. **Bootstrap styling** - Replaces all Tailwind components with Bootstrap equivalents
+3. **Professional UI** - Beautiful, responsive authentication forms and layouts
+4. **Complete functionality** - Login, register, password reset, email verification, 2FA support
 
-**Complete Authentication (Recommended)**:
+**Installation is automatic** - no prompts or configuration needed:
 
 ```bash
-# Full preset with Breeze (recommended)
+# Full authentication system with Bootstrap styling
 php artisan bal:install --preset=full
-# Accept the prompt to install Laravel Breeze for complete authentication
+# That's it! Complete authentication is ready to use
 
-# Or install Breeze first, then BAL Kit
-composer require laravel/breeze --dev
-php artisan breeze:install blade
-php artisan bal:install --preset=standard
-```
-
-**View Templates Only**:
-
-```bash
-# If you only want Bootstrap-styled authentication views
+# Or install authentication separately
 php artisan bal:install --auth
-# Choose "No" when prompted for Laravel Breeze
-# You'll need to implement your own controllers and routes
+# Still automatic - no prompts or manual setup required
 ```
+
+**What you get immediately:**
+
+- ✅ Working login, register, password reset pages
+- ✅ Beautiful Bootstrap-styled forms and layouts
+- ✅ Complete authentication controllers and middleware
+- ✅ Email verification and password confirmation
+- ✅ Professional responsive design
 
 ### SASS Compilation
 
