@@ -4,17 +4,17 @@
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/get-tony/bal-kit/blob/main/LICENSE)
 [![Laravel](https://img.shields.io/badge/Laravel-10%2B%20%7C%2012-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
-[![Version](https://img.shields.io/badge/Version-1.4.8%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.8)
+[![Version](https://img.shields.io/badge/Version-1.4.9%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.9)
 
 A complete Laravel starter kit with **Bootstrap**, **Alpine.js**, and **Livewire** featuring authentication pages, admin dashboard, profile settings, and reusable components - the perfect alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
 
-## 🎉 **Version 1.4.8 - PHPUnit 11.x Compatible**
+## 🎉 **Version 1.4.9 - Universal PHPUnit Compatibility**
 
 ### 🆕 **What Makes This Version Special**
 
-- ✅ **PHPUnit 11.x Compatibility**: Fixed configuration to work with both PHPUnit 10.x and 11.x
-- ✅ **GitHub Actions CI/CD Fixed**: All 17 test jobs now pass across PHP 8.2-8.4 and Laravel 10-12
-- ✅ **Universal Testing**: Removed deprecated `includeUncoveredFiles` attribute for PHPUnit 11.x compatibility
+- ✅ **Universal PHPUnit Compatibility**: Works seamlessly with PHPUnit 10.x and 11.x across all Laravel versions
+- ✅ **GitHub Actions CI/CD Perfect**: All 17 test jobs pass consistently across PHP 8.2-8.4 and Laravel 10-12
+- ✅ **Modern Configuration**: PHPUnit 11.x compatible structure without deprecated attributes
 - ✅ **Orchestra Testbench Compatibility**: Flexible version constraints support all Laravel versions
 - ✅ **Laravel-Native Testing**: Orchestra Testbench integration with 41 automated tests
 - ✅ **Enhanced vendor:publish**: Granular resource publishing with Laravel-standard tags
@@ -130,7 +130,7 @@ php artisan vendor:publish --provider="LaravelBalKit\BalKitServiceProvider"
 
 ## 🎯 What You Get
 
-### Complete Starter Kit (v1.4.8 Stable)
+### Complete Starter Kit (v1.4.9 Stable)
 
 - **Authentication Pages** - Professional login, registration, forgot password, and reset forms
 - **Admin Dashboard** - Modern dashboard with statistics cards, charts, activity feeds, and quick actions

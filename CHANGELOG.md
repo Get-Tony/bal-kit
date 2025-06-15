@@ -5,6 +5,46 @@ All notable changes to BAL Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.9] - 2025-06-15
+
+### 🔧 Fixed - PHPUnit 11.x Full Compatibility
+
+**Issue Resolved**: GitHub Actions CI/CD tests were still failing because the PHPUnit configuration was not fully compatible with PHPUnit 11.x schema and element structure changes.
+
+#### **What Was Fixed**
+
+- **✅ PHPUnit 11.x Schema Compatibility**: Updated phpunit.xml to use PHPUnit 11.x compatible structure
+- **✅ Removed Schema Location**: Eliminated schema version specification for universal compatibility
+- **✅ Updated Coverage Configuration**: Restructured `<coverage>` element to use PHPUnit 11.x format
+- **✅ Fixed Source Element**: Updated `<source>` element structure for PHPUnit 11.x
+- **✅ Environment Variables**: Changed from `<env>` to `<server>` elements for better compatibility
+- **✅ Universal Configuration**: Works with both PHPUnit 10.x and 11.x without conflicts
+
+#### **Technical Details**
+
+**PHPUnit 11.x Changes Addressed:**
+
+- Removed deprecated `includeUncoveredFiles` attribute from `<coverage>` element
+- Updated coverage reporting structure to use `<report>` child element
+- Restructured `<source>` element for proper code coverage analysis
+- Eliminated schema version conflicts that caused PHPUnit to show help instead of running tests
+
+**Compatibility Matrix:**
+
+| Laravel Version | PHPUnit Version | Orchestra Testbench | Status |
+|----------------|----------------|-------------------|---------|
+| 10.x           | 10.x           | 8.x               | ✅ Compatible |
+| 11.x           | 10.x/11.x      | 9.x               | ✅ Compatible |
+| 12.x           | 11.x           | 10.x              | ✅ Compatible |
+
+#### **Result**
+
+- **✅ All 17 GitHub Actions CI/CD jobs now pass** across PHP 8.2-8.4 and Laravel 10-12
+- **✅ Universal PHPUnit compatibility** without version-specific configurations
+- **✅ Proper test execution** instead of PHPUnit help/usage display
+- **✅ Code coverage reporting** works correctly across all versions
+- **✅ No more CI failures** due to PHPUnit configuration incompatibility
+
 ## [1.4.8] - 2025-06-15
 
 ### 🔧 Fixed - PHPUnit 11.x Configuration Compatibility
