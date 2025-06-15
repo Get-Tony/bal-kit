@@ -270,6 +270,19 @@ class InstallCommand extends Command
             $this->copyStub('layouts/app.blade.php', $layoutPath);
             $this->comment('✅ BAL Kit layout created');
         }
+
+        // Always ensure app-layout and guest-layout components exist
+        $appLayoutComponentPath = resource_path('views/components/app-layout.blade.php');
+        if (!$this->files->exists($appLayoutComponentPath)) {
+            $this->copyStub('components/app-layout.blade.php', $appLayoutComponentPath);
+            $this->comment('✅ App layout component created');
+        }
+
+        $guestLayoutComponentPath = resource_path('views/components/guest-layout.blade.php');
+        if (!$this->files->exists($guestLayoutComponentPath)) {
+            $this->copyStub('components/guest-layout.blade.php', $guestLayoutComponentPath);
+            $this->comment('✅ Guest layout component created');
+        }
     }
 
     /**
@@ -383,6 +396,20 @@ class InstallCommand extends Command
         if (!$this->files->exists($authLayoutPath)) {
             $issues[] = 'Auth layout component missing';
             $this->copyStub('layouts/auth.blade.php', $authLayoutPath); // Auto-fix
+        }
+
+        // Check app-layout component exists
+        $appLayoutPath = resource_path('views/components/app-layout.blade.php');
+        if (!$this->files->exists($appLayoutPath)) {
+            $issues[] = 'App layout component missing';
+            $this->copyStub('components/app-layout.blade.php', $appLayoutPath); // Auto-fix
+        }
+
+        // Check guest-layout component exists
+        $guestLayoutPath = resource_path('views/components/guest-layout.blade.php');
+        if (!$this->files->exists($guestLayoutPath)) {
+            $issues[] = 'Guest layout component missing';
+            $this->copyStub('components/guest-layout.blade.php', $guestLayoutPath); // Auto-fix
         }
 
         if (empty($issues)) {
@@ -735,6 +762,10 @@ class InstallCommand extends Command
             $this->copyStub('layouts/app.blade.php', $layoutPath);
             $this->info('🎨 Created application layout');
         }
+
+        // Also install the app-layout and guest-layout components for <x-app-layout> and <x-guest-layout> usage
+        $this->copyStub('components/app-layout.blade.php', resource_path('views/components/app-layout.blade.php'));
+        $this->copyStub('components/guest-layout.blade.php', resource_path('views/components/guest-layout.blade.php'));
     }
 
     /**
@@ -855,7 +886,9 @@ class InstallCommand extends Command
             'input-label.blade.php',
             'input-error.blade.php',
             'primary-button.blade.php',
-            'auth-session-status.blade.php'
+            'auth-session-status.blade.php',
+            'app-layout.blade.php',
+            'guest-layout.blade.php'
         ];
 
         foreach ($components as $component) {
@@ -906,27 +939,41 @@ class InstallCommand extends Command
             $this->warn('❌ App layout test failed - file missing');
         }
 
-        // Test 3: Check if auth components exist
-        $totalTests++;
-        $authLayoutPath = resource_path('views/components/auth-layout.blade.php');
+                // Test 3: Check if auth components exist (only if auth was installed)
         $loginPath = resource_path('views/auth/login.blade.php');
-        if ($this->files->exists($authLayoutPath) && $this->files->exists($loginPath)) {
+        if ($this->files->exists($loginPath)) {
+            $totalTests++;
             $loginContent = $this->files->get($loginPath);
-            if (strpos($loginContent, '<x-auth-layout>') !== false &&
-                strpos($loginContent, 'form-control') !== false) {
+
+            // Check for either auth-layout (simple auth) or guest-layout (breeze auth) patterns
+            $hasAuthLayout = strpos($loginContent, '<x-auth-layout>') !== false;
+            $hasGuestLayout = strpos($loginContent, '<x-guest-layout>') !== false;
+            $hasBootstrapStyling = strpos($loginContent, 'form-control') !== false ||
+                                   strpos($loginContent, '<x-text-input') !== false;
+
+            if (($hasAuthLayout || $hasGuestLayout) && $hasBootstrapStyling) {
                 $testsPassed++;
                 $this->comment('✅ Authentication components test passed');
             } else {
                 $this->warn('❌ Authentication components test failed - incorrect styling');
+                $this->comment('   Expected: <x-auth-layout> or <x-guest-layout> with Bootstrap styling');
+                $this->comment("   Found: auth-layout={$hasAuthLayout}, guest-layout={$hasGuestLayout}, bootstrap={$hasBootstrapStyling}");
             }
         } else {
-            $this->warn('❌ Authentication components test failed - files missing');
+            // Only show this as a test failure if auth components were supposed to be installed
+            $components = $this->getComponentsToInstall();
+            if (in_array('auth', $components)) {
+                $totalTests++;
+                $this->warn('❌ Authentication components test failed - login view missing');
+            } else {
+                $this->comment('ℹ️ Authentication components test skipped (not installed in this preset)');
+            }
         }
 
-        // Test 4: Check if Bootstrap components exist
-        $totalTests++;
+        // Test 4: Check if Bootstrap components exist (only if components were installed)
         $textInputPath = resource_path('views/components/text-input.blade.php');
         if ($this->files->exists($textInputPath)) {
+            $totalTests++;
             $content = $this->files->get($textInputPath);
             if (strpos($content, 'form-control') !== false) {
                 $testsPassed++;
@@ -935,7 +982,14 @@ class InstallCommand extends Command
                 $this->warn('❌ Bootstrap components test failed - incorrect styling');
             }
         } else {
-            $this->warn('❌ Bootstrap components test failed - files missing');
+            // Only show this as a test failure if components were supposed to be installed
+            $components = $this->getComponentsToInstall();
+            if (in_array('components', $components)) {
+                $totalTests++;
+                $this->warn('❌ Bootstrap components test failed - files missing');
+            } else {
+                $this->comment('ℹ️ Bootstrap components test skipped (not installed in this preset)');
+            }
         }
 
         // Summary
