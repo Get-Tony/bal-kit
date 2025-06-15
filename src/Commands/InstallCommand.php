@@ -132,6 +132,10 @@ class InstallCommand extends Command
      */
     protected function installComponents(array $components): void
     {
+        // PHASE 1: Pre-installation setup and file protection
+        $this->backupExistingFiles();
+
+        // PHASE 2: Install core dependencies first
         if ($components['bootstrap'] ?? false) {
             $this->installBootstrap();
         }
@@ -148,15 +152,241 @@ class InstallCommand extends Command
             $this->installSass();
         }
 
+        // PHASE 3: Setup BAL Kit foundation BEFORE authentication
+        $this->installJavaScript();
+        $this->updatePackageJson();
+        $this->updateViteConfig();
+        $this->createAppLayout();
+
+        // PHASE 4: Authentication (which may overwrite some files)
         if ($components['auth'] ?? false) {
             $this->installAuth();
         }
 
-        $this->installJavaScript();
+        // PHASE 5: Post-authentication cleanup and restoration
+        $this->postAuthenticationCleanup();
 
-        $this->updatePackageJson();
-        $this->updateViteConfig();
-        $this->createAppLayout();
+        // PHASE 6: Final verification and auto-fixes
+        $this->verifyAndFix();
+    }
+
+    /**
+     * Backup existing files to prevent data loss.
+     */
+    protected function backupExistingFiles(): void
+    {
+        $this->info('🛡️ Creating backup of existing files...');
+
+        $filesToBackup = [
+            'resources/views/layouts/app.blade.php',
+            'vite.config.js',
+            'resources/js/app.js',
+            'resources/js/bootstrap.js',
+            'package.json'
+        ];
+
+        foreach ($filesToBackup as $file) {
+            $fullPath = base_path($file);
+            if ($this->files->exists($fullPath)) {
+                $backupPath = $fullPath . '.bal-kit-backup-' . date('Y-m-d-H-i-s');
+                $this->files->copy($fullPath, $backupPath);
+                $this->comment("📋 Backed up {$file} to {$backupPath}");
+            }
+        }
+    }
+
+    /**
+     * Clean up after authentication installation and restore BAL Kit functionality.
+     */
+    protected function postAuthenticationCleanup(): void
+    {
+        $this->info('🧹 Cleaning up post-authentication installation...');
+
+        // Remove Tailwind artifacts left by Breeze
+        $this->removeTailwindArtifacts();
+
+        // Ensure BAL Kit layout is in place
+        $this->ensureBalKitLayout();
+
+        // Fix Vite configuration
+        $this->ensureCorrectViteConfig();
+
+        // Ensure Bootstrap is properly installed
+        $this->ensureBootstrapInstallation();
+    }
+
+    /**
+     * Remove Tailwind CSS artifacts that conflict with Bootstrap.
+     */
+    protected function removeTailwindArtifacts(): void
+    {
+        $this->comment('🗑️ Removing Tailwind CSS artifacts...');
+
+        // Remove Tailwind config files
+        $tailwindFiles = [
+            'tailwind.config.js',
+            'postcss.config.js'
+        ];
+
+        foreach ($tailwindFiles as $file) {
+            $fullPath = base_path($file);
+            if ($this->files->exists($fullPath)) {
+                $this->files->delete($fullPath);
+                $this->comment("✅ Removed {$file}");
+            }
+        }
+
+        // Remove CSS directory if it exists (BAL Kit uses SASS)
+        $cssPath = resource_path('css');
+        if ($this->files->isDirectory($cssPath)) {
+            $this->files->deleteDirectory($cssPath);
+            $this->comment('✅ Removed resources/css directory (using SASS instead)');
+        }
+    }
+
+    /**
+     * Ensure BAL Kit layout is in place and not overwritten.
+     */
+    protected function ensureBalKitLayout(): void
+    {
+        $layoutPath = resource_path('views/layouts/app.blade.php');
+
+        // Check if current layout is BAL Kit layout
+        if ($this->files->exists($layoutPath)) {
+            $content = $this->files->get($layoutPath);
+
+            // If it contains Tailwind classes or CSS references, it's not BAL Kit layout
+            if (strpos($content, 'resources/css/app.css') !== false ||
+                strpos($content, 'font-sans antialiased') !== false ||
+                strpos($content, 'min-h-screen bg-gray-100') !== false) {
+
+                $this->comment('🔄 Restoring BAL Kit layout (Breeze overwrote it)...');
+                $this->copyStub('layouts/app.blade.php', $layoutPath);
+                $this->comment('✅ BAL Kit layout restored');
+            }
+        } else {
+            // Create BAL Kit layout if it doesn't exist
+            $this->copyStub('layouts/app.blade.php', $layoutPath);
+            $this->comment('✅ BAL Kit layout created');
+        }
+    }
+
+    /**
+     * Ensure Vite configuration is correct for BAL Kit.
+     */
+    protected function ensureCorrectViteConfig(): void
+    {
+        $viteConfigPath = base_path('vite.config.js');
+
+        if ($this->files->exists($viteConfigPath)) {
+            $content = $this->files->get($viteConfigPath);
+
+            // Check if it's pointing to CSS instead of SASS
+            if (strpos($content, 'resources/css/app.css') !== false) {
+                $this->comment('🔄 Fixing Vite configuration to use SASS...');
+                $this->copyStub('vite.config.js', $viteConfigPath);
+                $this->comment('✅ Vite configuration fixed');
+            }
+        }
+    }
+
+    /**
+     * Ensure Bootstrap is properly installed and Tailwind is removed.
+     */
+    protected function ensureBootstrapInstallation(): void
+    {
+        $packageJsonPath = base_path('package.json');
+
+        if ($this->files->exists($packageJsonPath)) {
+            $packageJson = json_decode($this->files->get($packageJsonPath), true);
+
+            // Check for Tailwind dependencies and remove them
+            $tailwindPackages = [
+                'tailwindcss',
+                'postcss',
+                'autoprefixer',
+                '@tailwindcss/forms'
+            ];
+
+            $hasUnwantedPackages = false;
+            foreach ($tailwindPackages as $package) {
+                if (isset($packageJson['devDependencies'][$package]) ||
+                    isset($packageJson['dependencies'][$package])) {
+                    $hasUnwantedPackages = true;
+                    break;
+                }
+            }
+
+            if ($hasUnwantedPackages) {
+                $this->comment('🔄 Removing Tailwind packages and ensuring Bootstrap...');
+                $this->runProcess('npm uninstall tailwindcss postcss autoprefixer @tailwindcss/forms');
+                $this->runProcess('npm install bootstrap @popperjs/core');
+                $this->comment('✅ Package dependencies corrected');
+            }
+        }
+    }
+
+    /**
+     * Verify installation and auto-fix common issues.
+     */
+    protected function verifyAndFix(): void
+    {
+        $this->info('🔍 Verifying installation and auto-fixing issues...');
+
+        $issues = [];
+
+        // Check SASS directory exists
+        if (!$this->files->isDirectory(resource_path('sass'))) {
+            $issues[] = 'SASS directory missing';
+            $this->installSass(); // Auto-fix
+        }
+
+        // Check BAL Kit JavaScript exists
+        if (!$this->files->exists(resource_path('js/bootstrap.js'))) {
+            $issues[] = 'BAL Kit JavaScript missing';
+            $this->installJavaScript(); // Auto-fix
+        }
+
+        // Check layout uses correct assets
+        $layoutPath = resource_path('views/layouts/app.blade.php');
+        if ($this->files->exists($layoutPath)) {
+            $content = $this->files->get($layoutPath);
+            if (strpos($content, 'resources/sass/app.scss') === false) {
+                $issues[] = 'Layout not using SASS assets';
+                $this->ensureBalKitLayout(); // Auto-fix
+            }
+        }
+
+        if (empty($issues)) {
+            $this->info('✅ All checks passed! BAL Kit is properly installed.');
+        } else {
+            $this->info('🔧 Auto-fixed ' . count($issues) . ' issues:');
+            foreach ($issues as $issue) {
+                $this->comment("  - {$issue}");
+            }
+        }
+
+        // Final build test
+        $this->comment('🧪 Testing asset compilation...');
+        $buildResult = $this->runProcessSilent('npm run build');
+
+        if ($buildResult === 0) {
+            $this->info('✅ Assets compile successfully!');
+        } else {
+            $this->warn('⚠️  Asset compilation failed. Run "npm run build" to see details.');
+            $this->comment('💡 This might be due to missing node_modules. Try: npm install');
+        }
+    }
+
+    /**
+     * Run a shell process silently and return exit code.
+     */
+    protected function runProcessSilent(string $command): int
+    {
+        $process = Process::fromShellCommandline($command, base_path());
+        $process->run();
+
+        return $process->getExitCode();
     }
 
     /**

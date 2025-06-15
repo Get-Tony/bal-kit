@@ -98,6 +98,125 @@ php artisan bal:publish --components
 - **Reusable Components** - Professional Blade components (cards, buttons, alerts, modals) with extensive options
 - **Bootstrap Showcase** - Comprehensive demo page with all Bootstrap 5.3+ components and examples
 
+## 🚀 Getting Started
+
+### Step-by-Step Guide
+
+#### 1. Create New Laravel Project
+
+```bash
+composer create-project laravel/laravel my-project
+cd my-project
+```
+
+#### 2. Install BAL Kit
+
+```bash
+composer require get-tony/bal-kit
+php artisan bal:install --preset=full
+```
+
+#### 3. Install Dependencies and Build
+
+```bash
+npm install
+npm run build
+```
+
+#### 4. Start Development Server
+
+```bash
+php artisan serve
+```
+
+### Your First Page
+
+Create a simple page using BAL Kit's layout:
+
+```blade
+{{-- resources/views/welcome.blade.php --}}
+<x-app-layout>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title mb-0">Welcome to BAL Kit!</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            Your Bootstrap + Alpine.js + Livewire application is ready.
+                        </p>
+
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-primary" onclick="BalKit.toast('Hello from BAL Kit!', 'success')">
+                                Show Toast
+                            </button>
+
+                            <button class="btn btn-outline-secondary" x-data x-on:click="$dispatch('open-modal')">
+                                Open Modal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
+```
+
+### Your First Livewire Component
+
+```bash
+php artisan make:livewire Counter
+```
+
+```php
+{{-- app/Livewire/Counter.php --}}
+<?php
+
+use Livewire\Component;
+
+class Counter extends Component
+{
+    public int $count = 0;
+
+    public function increment()
+    {
+        $this->count++;
+    }
+
+    public function decrement()
+    {
+        $this->count--;
+    }
+
+    public function render()
+    {
+        return view('livewire.counter');
+    }
+}
+```
+
+```blade
+{{-- resources/views/livewire/counter.blade.php --}}
+<div class="card">
+    <div class="card-body text-center">
+        <h2 class="display-4 text-primary">{{ $count }}</h2>
+        <div class="btn-group" role="group">
+            <button class="btn btn-outline-danger" wire:click="decrement">-</button>
+            <button class="btn btn-outline-success" wire:click="increment">+</button>
+        </div>
+    </div>
+</div>
+```
+
+Use it in your blade file:
+
+```blade
+<livewire:counter />
+```
+
 ### Professional UI Foundation
 
 - **Responsive Bootstrap 5** components out of the box
