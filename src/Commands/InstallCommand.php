@@ -157,6 +157,7 @@ class InstallCommand extends Command
         $this->updatePackageJson();
         $this->updateViteConfig();
         $this->createAppLayout();
+        $this->createWelcomePage();
 
         // PHASE 4: Authentication (which may overwrite some files)
         if ($components['auth'] ?? false) {
@@ -345,6 +346,17 @@ class InstallCommand extends Command
         if (!$this->files->exists(resource_path('js/bootstrap.js'))) {
             $issues[] = 'BAL Kit JavaScript missing';
             $this->installJavaScript(); // Auto-fix
+        }
+
+        // Check welcome page is BAL Kit compatible
+        $welcomePath = resource_path('views/welcome.blade.php');
+        if ($this->files->exists($welcomePath)) {
+            $content = $this->files->get($welcomePath);
+            if (strpos($content, 'resources/css/app.css') !== false ||
+                strpos($content, 'tailwindcss') !== false) {
+                $issues[] = 'Welcome page incompatible with BAL Kit';
+                $this->createWelcomePage(); // Auto-fix
+            }
         }
 
         // Check layout uses correct assets
@@ -746,5 +758,27 @@ class InstallCommand extends Command
         $this->copyStub('js/bootstrap.js', resource_path('js/bootstrap.js'));
 
         $this->info('✅ BAL Kit JavaScript utilities installed');
+    }
+
+    /**
+     * Create BAL Kit welcome page.
+     */
+    protected function createWelcomePage(): void
+    {
+        $this->comment('🏠 Creating BAL Kit welcome page...');
+
+        $welcomePath = resource_path('views/welcome.blade.php');
+
+        // Backup existing welcome page if it exists
+        if ($this->files->exists($welcomePath)) {
+            $backupPath = $welcomePath . '.laravel-original-' . date('Y-m-d-H-i-s');
+            $this->files->copy($welcomePath, $backupPath);
+            $this->comment("📋 Backed up original welcome page to {$backupPath}");
+        }
+
+        // Copy BAL Kit welcome page
+        $this->copyStub('pages/welcome.blade.php', $welcomePath);
+
+        $this->comment('✅ BAL Kit welcome page created');
     }
 }
