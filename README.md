@@ -4,16 +4,18 @@
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/get-tony/bal-kit/blob/main/LICENSE)
 [![Laravel](https://img.shields.io/badge/Laravel-10%2B%20%7C%2012-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
-[![Version](https://img.shields.io/badge/Version-1.4.6%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.6)
+[![Version](https://img.shields.io/badge/Version-1.4.7%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.7)
 
 A complete Laravel starter kit with **Bootstrap**, **Alpine.js**, and **Livewire** featuring authentication pages, admin dashboard, profile settings, and reusable components - the perfect alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
 
-## 🎉 **Version 1.4.6 - Laravel-Native Publishing**
+## 🎉 **Version 1.4.7 - CI/CD & Testing Enhanced**
 
 **This is the first stable, production-ready release of BAL Kit.** All previous versions have been deprecated and removed due to critical issues. This release represents a complete overhaul with comprehensive testing and validation.
 
 ### 🆕 **What Makes This Version Special**
 
+- ✅ **GitHub Actions CI/CD Fixed**: All 17 test jobs now pass across PHP 8.2-8.4 and Laravel 10-12
+- ✅ **Orchestra Testbench Compatibility**: Flexible version constraints support all Laravel versions
 - ✅ **Laravel-Native Testing**: Orchestra Testbench integration with 41 automated tests
 - ✅ **Enhanced vendor:publish**: Granular resource publishing with Laravel-standard tags
 - ✅ **Full Preset Fixed**: `--preset=full` now includes authentication automatically (no more manual steps!)
@@ -128,7 +130,7 @@ php artisan vendor:publish --provider="LaravelBalKit\BalKitServiceProvider"
 
 ## 🎯 What You Get
 
-### Complete Starter Kit (v1.4.6 Stable)
+### Complete Starter Kit (v1.4.7 Stable)
 
 - **Authentication Pages** - Professional login, registration, forgot password, and reset forms
 - **Admin Dashboard** - Modern dashboard with statistics cards, charts, activity feeds, and quick actions

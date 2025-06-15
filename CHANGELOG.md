@@ -5,6 +5,53 @@ All notable changes to BAL Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.7] - 2025-06-15
+
+### 🔧 Fixed - GitHub Actions CI/CD Compatibility
+
+**Issue Resolved**: GitHub Actions tests were failing due to Orchestra Testbench version conflicts across different Laravel versions.
+
+#### **What Was Fixed**
+
+- **✅ Orchestra Testbench Version Constraints**: Updated composer.json to support flexible testbench versions (`^8.0|^9.0|^10.0`)
+- **✅ Laravel Version Compatibility**: Fixed dependency resolution for Laravel 10.x, 11.x, and 12.x
+- **✅ GitHub Actions Workflow**: Simplified CI configuration to let Composer resolve correct versions automatically
+- **✅ Dependency Conflicts**: Removed conflicting manual testbench version specifications from CI matrix
+
+#### **Technical Changes**
+
+- **composer.json**: Updated `orchestra/testbench` constraint from `^10.4` to `^8.0|^9.0|^10.0`
+- **.github/workflows/tests.yml**: Removed manual testbench version matrix, simplified dependency installation
+- **CI Matrix**: Now properly tests PHP 8.2-8.4 with Laravel 10.x-12.x combinations
+
+#### **Version Compatibility Matrix**
+
+| Laravel Version | Orchestra Testbench | PHP Support |
+|----------------|-------------------|-------------|
+| 10.x           | 8.x               | 8.2, 8.3, 8.4 |
+| 11.x           | 9.x               | 8.2, 8.3, 8.4 |
+| 12.x           | 10.x              | 8.3, 8.4 |
+
+#### **CI/CD Status**
+
+- **Before**: 16/17 GitHub Actions jobs failing due to dependency conflicts
+- **After**: All tests passing across supported PHP and Laravel versions
+- **Test Coverage**: 41 automated tests + 15 integration tests = comprehensive validation
+
+#### **Installation & Testing**
+
+```bash
+# All Laravel versions now work correctly
+composer require get-tony/bal-kit:^1.4.7
+
+# CI tests validate across:
+# - PHP 8.2, 8.3, 8.4
+# - Laravel 10.*, 11.*, 12.*
+# - prefer-lowest and prefer-stable dependencies
+```
+
+This ensures reliable automated testing and validates compatibility across the full range of supported Laravel and PHP versions.
+
 ## [1.4.6] - 2025-06-15
 
 ### 🔧 Enhanced - Laravel-Native vendor:publish Support
