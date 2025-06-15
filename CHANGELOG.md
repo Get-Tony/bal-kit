@@ -5,6 +5,55 @@ All notable changes to BAL Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.5] - 2025-06-15
+
+### 🔧 Fixed - Full Preset Authentication
+
+**Issue Resolved**: The `--preset=full` installation was not automatically including authentication, requiring users to manually run `php artisan bal:install --sass --auth`.
+
+#### **What Was Fixed**
+
+- **✅ Full Preset Authentication**: Fixed configuration loading issue that prevented authentication from being installed with the full preset
+- **✅ Hardcoded Preset Configurations**: Moved preset configurations from config file to command class to ensure reliability during installation
+- **✅ Enhanced Installation Feedback**: Added clear messaging when authentication system is being installed
+- **✅ Improved Reliability**: Eliminated dependency on config system during installation process
+
+#### **Technical Changes**
+
+- **InstallCommand.php**: Added `getPresetConfigurations()` method with hardcoded preset definitions
+- **InstallCommand.php**: Enhanced authentication installation with clear progress messaging
+- **InstallCommand.php**: Improved preset handling to ensure consistent behavior
+
+#### **User Experience**
+
+- **Before**: `php artisan bal:install --preset=full` + `php artisan bal:install --sass --auth` (2 commands)
+- **After**: `php artisan bal:install --preset=full` (1 command, includes everything)
+
+#### **Installation Commands**
+
+```bash
+# Now works as expected - includes authentication automatically
+php artisan bal:install --preset=full
+
+# All presets work reliably:
+php artisan bal:install --preset=minimal   # Bootstrap + Alpine only
+php artisan bal:install --preset=standard  # + Livewire + SASS
+php artisan bal:install --preset=full      # + Authentication (FIXED!)
+```
+
+#### **Verification**
+
+The full preset now correctly installs:
+
+- ✅ Bootstrap 5.3+ with professional styling
+- ✅ Alpine.js for reactive components
+- ✅ Livewire 3 for dynamic functionality
+- ✅ 7-1 SASS architecture with organized stylesheets
+- ✅ **Complete authentication system** (login, register, password reset)
+- ✅ Air-gapped compatibility with no external dependencies
+
+This ensures users get the complete BAL Kit experience with a single command as intended.
+
 ## [1.4.4] - 2025-06-15
 
 ### 🎉 STABLE RELEASE - Fresh Start
@@ -60,7 +109,7 @@ All previous versions (v1.0.0 through v1.4.3) have been deprecated and removed d
 # Fresh Laravel installation
 composer create-project laravel/laravel my-app
 cd my-app
-composer require get-tony/bal-kit:^1.4.4
+composer require get-tony/bal-kit:^1.4.5
 php artisan bal:install --preset=full
 npm install && npm run dev
 ```

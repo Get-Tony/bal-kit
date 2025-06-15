@@ -83,7 +83,7 @@ class InstallCommand extends Command
      */
     protected function handlePreset(string $preset): void
     {
-        $presets = config('bal-kit.presets', []);
+        $presets = $this->getPresetConfigurations();
 
         if (!isset($presets[$preset])) {
             $this->error("❌ Unknown preset: {$preset}");
@@ -95,6 +95,36 @@ class InstallCommand extends Command
         $this->newLine();
 
         $this->installComponents($presets[$preset]);
+    }
+
+    /**
+     * Get preset configurations.
+     */
+    protected function getPresetConfigurations(): array
+    {
+        return [
+            'minimal' => [
+                'bootstrap' => true,
+                'alpine' => true,
+                'livewire' => false,
+                'sass' => false,
+                'auth' => false,
+            ],
+            'standard' => [
+                'bootstrap' => true,
+                'alpine' => true,
+                'livewire' => true,
+                'sass' => true,
+                'auth' => false,
+            ],
+            'full' => [
+                'bootstrap' => true,
+                'alpine' => true,
+                'livewire' => true,
+                'sass' => true,
+                'auth' => true,
+            ],
+        ];
     }
 
     /**
@@ -161,6 +191,7 @@ class InstallCommand extends Command
 
         // PHASE 4: Authentication (which may overwrite some files)
         if ($components['auth'] ?? false) {
+            $this->info('🔐 Installing complete authentication system...');
             $this->installAuth();
         }
 

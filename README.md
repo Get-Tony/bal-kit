@@ -4,16 +4,17 @@
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/get-tony/bal-kit/blob/main/LICENSE)
 [![Laravel](https://img.shields.io/badge/Laravel-10%2B%20%7C%2012-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
-[![Version](https://img.shields.io/badge/Version-1.4.4%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.4)
+[![Version](https://img.shields.io/badge/Version-1.4.5%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.5)
 
 A complete Laravel starter kit with **Bootstrap**, **Alpine.js**, and **Livewire** featuring authentication pages, admin dashboard, profile settings, and reusable components - the perfect alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
 
-## 🎉 **Version 1.4.4 - Fresh Stable Release**
+## 🎉 **Version 1.4.5 - Full Preset Fixed**
 
 **This is the first stable, production-ready release of BAL Kit.** All previous versions have been deprecated and removed due to critical issues. This release represents a complete overhaul with comprehensive testing and validation.
 
 ### 🆕 **What Makes This Version Special**
 
+- ✅ **Full Preset Fixed**: `--preset=full` now includes authentication automatically (no more manual steps!)
 - ✅ **Fully Tested**: 15 comprehensive tests ensuring reliability
 - ✅ **View Caching Fixed**: Resolved Laravel view caching failures
 - ✅ **Complete Authentication**: All auth flows working perfectly
@@ -46,7 +47,7 @@ A complete Laravel starter kit with **Bootstrap**, **Alpine.js**, and **Livewire
 ```bash
 composer require get-tony/bal-kit
 php artisan bal:install --preset=standard
-npm install && npm run dev
+npm install && npm run build
 ```
 
 ### Fresh Laravel Project
@@ -56,7 +57,7 @@ composer create-project laravel/laravel my-app
 cd my-app
 composer require get-tony/bal-kit
 php artisan bal:install --preset=full
-npm install && npm run dev
+npm install && npm run build
 php artisan serve
 ```
 
@@ -108,7 +109,7 @@ php artisan bal:publish --components
 
 ## 🎯 What You Get
 
-### Complete Starter Kit (v1.4.4 Stable)
+### Complete Starter Kit (v1.4.5 Stable)
 
 - **Authentication Pages** - Professional login, registration, forgot password, and reset forms
 - **Admin Dashboard** - Modern dashboard with statistics cards, charts, activity feeds, and quick actions
