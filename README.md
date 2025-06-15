@@ -117,7 +117,7 @@ php artisan bal:publish --components
 
 - **Professional layouts** - Application layout with Bootstrap navbar, flash messages, and footer
 - **Flash message handling** - Automatic Bootstrap alert styling for session feedback
-- **Authentication scaffolding** - Bootstrap-styled auth forms with Laravel Breeze integration
+- **Authentication options** - Bootstrap-styled auth forms with optional Laravel Breeze integration for complete functionality
 - **Organized structure** - Livewire components with clear organization
 - **Vite configuration** - Optimized build setup with Bootstrap alias and hot reload
 
@@ -402,23 +402,36 @@ BalKit.yourUtility = function(param) {
 
 ## 🔧 Troubleshooting
 
-### Authentication Installation Issues
+### Authentication Installation
 
-If `php artisan bal:install --preset=full` fails with Breeze errors:
+BAL Kit provides **Bootstrap-styled authentication views** and **recommends Laravel Breeze** for complete authentication functionality.
 
-**Option 1**: Install Breeze manually first:
+**Default Behavior**: When you run `php artisan bal:install --preset=full` or `php artisan bal:install --auth`, BAL Kit will:
+
+1. **Ask if you want Laravel Breeze** (recommended, default: **YES**)
+   - **YES**: Installs complete authentication with Laravel Breeze + Bootstrap styling
+   - **NO**: Installs only Bootstrap-styled authentication view templates (no controllers/logic)
+
+**Complete Authentication (Recommended)**:
 
 ```bash
+# Full preset with Breeze (recommended)
+php artisan bal:install --preset=full
+# Accept the prompt to install Laravel Breeze for complete authentication
+
+# Or install Breeze first, then BAL Kit
 composer require laravel/breeze --dev
 php artisan breeze:install blade
 php artisan bal:install --preset=standard
 ```
 
-**Option 2**: Use the standard preset and add auth manually:
+**View Templates Only**:
 
 ```bash
-php artisan bal:install --preset=standard
+# If you only want Bootstrap-styled authentication views
 php artisan bal:install --auth
+# Choose "No" when prompted for Laravel Breeze
+# You'll need to implement your own controllers and routes
 ```
 
 ### SASS Compilation

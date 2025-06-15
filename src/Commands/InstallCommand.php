@@ -152,7 +152,6 @@ class InstallCommand extends Command
             $this->installAuth();
         }
 
-        // Always copy JavaScript stubs for BAL Kit utilities
         $this->installJavaScript();
 
         $this->updatePackageJson();
@@ -276,12 +275,17 @@ class InstallCommand extends Command
     {
         $this->info('🔐 Installing authentication scaffolding...');
 
-        // Check if user wants Breeze or simple auth
-        $useBreeze = $this->confirm('Use Laravel Breeze for authentication?', false);
+        $this->comment('BAL Kit provides Bootstrap-styled authentication views.');
+        $this->comment('For complete authentication functionality, we recommend Laravel Breeze.');
+        $this->newLine();
+
+        // Check if user wants Breeze or simple auth templates
+        $useBreeze = $this->confirm('Install Laravel Breeze for complete authentication?', true);
 
         if ($useBreeze) {
             $this->installBreezeAuth();
         } else {
+            $this->comment('Installing Bootstrap-styled authentication view templates only...');
             $this->installSimpleAuth();
         }
 
