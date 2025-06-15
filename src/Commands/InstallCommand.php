@@ -367,6 +367,22 @@ class InstallCommand extends Command
                 $issues[] = 'Layout not using SASS assets';
                 $this->ensureBalKitLayout(); // Auto-fix
             }
+            if (strpos($content, 'resources/css/app.css') !== false) {
+                $issues[] = 'Layout still references CSS instead of SASS';
+                $this->ensureBalKitLayout(); // Auto-fix
+            }
+            if (strpos($content, 'font-sans antialiased') !== false ||
+                strpos($content, 'min-h-screen bg-gray-100') !== false) {
+                $issues[] = 'Layout still uses Tailwind classes';
+                $this->ensureBalKitLayout(); // Auto-fix
+            }
+        }
+
+        // Check auth-layout component exists
+        $authLayoutPath = resource_path('views/components/auth-layout.blade.php');
+        if (!$this->files->exists($authLayoutPath)) {
+            $issues[] = 'Auth layout component missing';
+            $this->copyStub('layouts/auth.blade.php', $authLayoutPath); // Auto-fix
         }
 
         if (empty($issues)) {
@@ -388,6 +404,10 @@ class InstallCommand extends Command
             $this->warn('⚠️  Asset compilation failed. Run "npm run build" to see details.');
             $this->comment('💡 This might be due to missing node_modules. Try: npm install');
         }
+
+        // Post-installation functionality test
+        $this->comment('🔍 Running post-installation functionality tests...');
+        $this->runPostInstallationTests();
     }
 
     /**
@@ -567,7 +587,7 @@ class InstallCommand extends Command
             $this->runProcess('npm uninstall tailwindcss postcss autoprefixer @tailwindcss/forms');
             $this->runProcess('npm install bootstrap @popperjs/core alpinejs');
 
-            // Replace Breeze authentication views with BAL Kit Bootstrap versions
+                        // Replace Breeze authentication views with BAL Kit Bootstrap versions
             $this->info('🎨 Installing BAL Kit Bootstrap authentication views...');
             $this->copyStub('auth/login.blade.php', resource_path('views/auth/login.blade.php'));
             $this->copyStub('auth/register.blade.php', resource_path('views/auth/register.blade.php'));
@@ -577,8 +597,15 @@ class InstallCommand extends Command
             // Replace guest layout with auth layout
             $this->copyStub('layouts/auth.blade.php', resource_path('views/layouts/guest.blade.php'));
 
+            // Create auth-layout component for authentication views
+            $this->copyStub('layouts/auth.blade.php', resource_path('views/components/auth-layout.blade.php'));
+
             // Install BAL Kit Bootstrap components to replace Tailwind ones
             $this->installBootstrapComponents();
+
+            // CRITICAL: Force replace app layout (Breeze overwrites it)
+            $this->info('🔄 Ensuring BAL Kit app layout is properly installed...');
+            $this->copyStub('layouts/app.blade.php', resource_path('views/layouts/app.blade.php'));
 
             $this->info('✅ Breeze configured with Bootstrap successfully');
         } catch (\Exception $e) {
@@ -852,5 +879,88 @@ class InstallCommand extends Command
         }
 
         $this->info('✅ Bootstrap components installed');
+    }
+
+    /**
+     * Run post-installation functionality tests.
+     */
+    protected function runPostInstallationTests(): void
+    {
+        $testsPassed = 0;
+        $totalTests = 0;
+
+        // Test 1: Check if welcome page exists and uses correct layout
+        $totalTests++;
+        $welcomePath = resource_path('views/welcome.blade.php');
+        if ($this->files->exists($welcomePath)) {
+            $content = $this->files->get($welcomePath);
+            if (strpos($content, '<x-app-layout>') !== false &&
+                strpos($content, 'resources/css/app.css') === false) {
+                $testsPassed++;
+                $this->comment('✅ Welcome page test passed');
+            } else {
+                $this->warn('❌ Welcome page test failed - incorrect layout or assets');
+            }
+        } else {
+            $this->warn('❌ Welcome page test failed - file missing');
+        }
+
+        // Test 2: Check if app layout is correct
+        $totalTests++;
+        $layoutPath = resource_path('views/layouts/app.blade.php');
+        if ($this->files->exists($layoutPath)) {
+            $content = $this->files->get($layoutPath);
+            if (strpos($content, 'resources/sass/app.scss') !== false &&
+                strpos($content, 'navbar navbar-expand-lg') !== false &&
+                strpos($content, 'resources/css/app.css') === false) {
+                $testsPassed++;
+                $this->comment('✅ App layout test passed');
+            } else {
+                $this->warn('❌ App layout test failed - incorrect assets or styling');
+            }
+        } else {
+            $this->warn('❌ App layout test failed - file missing');
+        }
+
+        // Test 3: Check if auth components exist
+        $totalTests++;
+        $authLayoutPath = resource_path('views/components/auth-layout.blade.php');
+        $loginPath = resource_path('views/auth/login.blade.php');
+        if ($this->files->exists($authLayoutPath) && $this->files->exists($loginPath)) {
+            $loginContent = $this->files->get($loginPath);
+            if (strpos($loginContent, '<x-auth-layout>') !== false &&
+                strpos($loginContent, 'form-control') !== false) {
+                $testsPassed++;
+                $this->comment('✅ Authentication components test passed');
+            } else {
+                $this->warn('❌ Authentication components test failed - incorrect styling');
+            }
+        } else {
+            $this->warn('❌ Authentication components test failed - files missing');
+        }
+
+        // Test 4: Check if Bootstrap components exist
+        $totalTests++;
+        $textInputPath = resource_path('views/components/text-input.blade.php');
+        if ($this->files->exists($textInputPath)) {
+            $content = $this->files->get($textInputPath);
+            if (strpos($content, 'form-control') !== false) {
+                $testsPassed++;
+                $this->comment('✅ Bootstrap components test passed');
+            } else {
+                $this->warn('❌ Bootstrap components test failed - incorrect styling');
+            }
+        } else {
+            $this->warn('❌ Bootstrap components test failed - files missing');
+        }
+
+        // Summary
+        if ($testsPassed === $totalTests) {
+            $this->info("🎉 All {$totalTests} post-installation tests passed!");
+            $this->info('✅ BAL Kit is ready for use!');
+        } else {
+            $this->warn("⚠️  {$testsPassed}/{$totalTests} tests passed. Some issues may need manual fixing.");
+            $this->comment('💡 Check the warnings above and run the installation again if needed.');
+        }
     }
 }
