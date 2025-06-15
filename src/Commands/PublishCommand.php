@@ -33,6 +33,7 @@ class PublishCommand extends Command
     {
         if ($this->option('list')) {
             $this->listVendorPublishTags();
+
             return 0;
         }
 
@@ -56,10 +57,11 @@ class PublishCommand extends Command
                 $this->publishComponents();
             }
 
-            if (!$this->option('config') && !$this->option('stubs') && !$this->option('components')) {
+            if (! $this->option('config') && ! $this->option('stubs') && ! $this->option('components')) {
                 $this->info('💡 Specify what to publish: --config, --stubs, --components, or --all');
                 $this->newLine();
                 $this->info('💡 Or use --list to see all vendor:publish options');
+
                 return 0;
             }
         }

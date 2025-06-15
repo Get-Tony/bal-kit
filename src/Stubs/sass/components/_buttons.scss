@@ -16,12 +16,11 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     &:hover {
         transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
     }
 
     &:active {
@@ -32,12 +31,14 @@
     &.btn-icon {
         --bs-btn-padding-x: 0.75rem;
         --bs-btn-padding-y: 0.75rem;
+
         width: 2.5rem;
         height: 2.5rem;
 
         &.btn-sm {
             width: 2rem;
             height: 2rem;
+
             --bs-btn-padding-x: 0.5rem;
             --bs-btn-padding-y: 0.5rem;
         }
@@ -45,6 +46,7 @@
         &.btn-lg {
             width: 3rem;
             height: 3rem;
+
             --bs-btn-padding-x: 1rem;
             --bs-btn-padding-y: 1rem;
         }
@@ -81,7 +83,7 @@
         margin-top: -0.5rem;
         width: 1rem;
         height: 1rem;
-        border: 2px solid currentColor;
+        border: 2px solid currentcolor;
         border-radius: 50%;
         border-right-color: transparent;
         animation: btn-loading-spin 0.75s linear infinite;

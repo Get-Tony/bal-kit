@@ -4,56 +4,26 @@
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/get-tony/bal-kit/blob/main/LICENSE)
 [![Laravel](https://img.shields.io/badge/Laravel-10%2B%20%7C%2012-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
-[![Version](https://img.shields.io/badge/Version-1.4.10%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.10)
+[![Version](https://img.shields.io/badge/Version-1.5.0%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.5.0)
 
-A complete Laravel starter kit with **Bootstrap**, **Alpine.js**, and **Livewire** featuring authentication pages, admin dashboard, profile settings, and reusable components - the perfect alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
-
-## 🎉 **Version 1.4.10 - Reliable CI/CD Pipeline**
-
-### 🆕 **What Makes This Version Special**
-
-- ✅ **Reliable CI/CD Pipeline**: Simplified GitHub Actions workflow with consistently passing tests
-- ✅ **Real-World Integration Testing**: Comprehensive validation through actual Laravel app creation and testing
-- ✅ **Pragmatic Testing Strategy**: Focus on tests that validate actual functionality over complex matrix combinations
-- ✅ **Universal PHPUnit Compatibility**: Works seamlessly with PHPUnit 10.x and 11.x across all Laravel versions
-- ✅ **Enhanced vendor:publish**: Granular resource publishing with Laravel-standard tags
-- ✅ **Full Preset Fixed**: `--preset=full` now includes authentication automatically (no more manual steps!)
-- ✅ **Comprehensive Testing**: Integration tests + 41 unit/feature tests + 15 script tests ensuring reliability
-- ✅ **View Caching Fixed**: Resolved Laravel view caching failures
-- ✅ **Complete Authentication**: All auth flows working perfectly
-- ✅ **Air-Gapped Friendly**: No external dependencies (perfect for secure environments)
-- ✅ **Bootstrap Integration**: Professional, consistent styling throughout
-- ✅ **Production Ready**: Thoroughly validated for enterprise use
-
-### ⚠️ **Important Notice**
-
-**Previous versions (v1.0.0 - v1.4.3) have been completely removed.** This ensures you only get the stable, working version. All old tags have been deleted to prevent confusion and ensure everyone uses this reliable release.
-
-## ⚖️ Licensing Notice
-
-**BAL Kit is proprietary software.** You may view and examine the source code for evaluation purposes, but commercial use requires a separate license. For production use or commercial projects, please contact [get-tony@outlook.com](mailto:get-tony@outlook.com) for licensing information.
+A production-ready Laravel starter kit with **Bootstrap 5**, **Alpine.js**, and **Livewire 3** - the professional alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
 
 ## ✨ What is BAL Kit?
 
 **BAL Kit** = **B**ootstrap + **A**lpine + **L**ivewire
 
-- 🎨 **Bootstrap 5** - World's most popular CSS framework with professional components
-- 🏔️ **Alpine.js** - Lightweight, reactive JavaScript framework (only ~15kB)
-- ⚡ **Livewire 3** - Dynamic Laravel components without leaving PHP
+A complete starter kit featuring:
+
+- 🎨 **Bootstrap 5** - Professional UI components and responsive design
+- 🏔️ **Alpine.js** - Lightweight reactivity (~15kB)
+- ⚡ **Livewire 3** - Dynamic components without leaving PHP
 - 🏗️ **7-1 SASS Architecture** - Organized, maintainable stylesheets
-- 🚀 **Vite Integration** - Fast builds and hot module replacement
+- 🔐 **Complete Authentication** - Login, registration, dashboard, profile management
+- 🧩 **Reusable Components** - Professional Blade components ready to use
 
 ## 🚀 Quick Start
 
-### Install in Existing Laravel Project
-
-```bash
-composer require get-tony/bal-kit
-php artisan bal:install --preset=standard
-npm install && npm run build
-```
-
-### Fresh Laravel Project
+### New Project
 
 ```bash
 composer create-project laravel/laravel my-app
@@ -64,724 +34,147 @@ npm install && npm run build
 php artisan serve
 ```
 
-### 🔧 Requirements
+### Existing Project
+
+```bash
+composer require get-tony/bal-kit
+php artisan bal:install --preset=standard
+npm install && npm run build
+```
+
+## 🎯 What You Get
+
+- **Authentication System** - Complete login, registration, and password reset
+- **Admin Dashboard** - Modern dashboard with statistics and activity feeds
+- **Profile Management** - Multi-tab profile settings with security options
+- **Professional Components** - Cards, buttons, alerts, modals with extensive customization
+- **Bootstrap Showcase** - Comprehensive demo of all Bootstrap 5.3+ components
+
+## 🔧 System Requirements
 
 - **Laravel 10+ or 12+**
 - **PHP 8.2+**
 - **Node.js 18+** and **NPM**
 - **Composer 2.0+**
 
-> **Note:** BAL Kit automatically installs and configures all required dependencies including Livewire, Bootstrap, and Alpine.js. No manual dependency installation is required.
+> **Note:** All dependencies are automatically installed and configured.
 
-## 📦 Installation Options
+## 📚 Documentation
 
-### Preset Installations
+### Quick Links
+
+- **[📖 Complete Documentation](docs/README.md)** - Comprehensive guides and examples
+- **[🚀 Installation Guide](docs/installation.md)** - Detailed installation options
+- **[⚙️ Configuration](docs/configuration.md)** - Customize settings and behavior
+- **[🎨 Usage Examples](docs/usage-examples.md)** - Code examples and patterns
+- **[🔧 Customization](docs/customization.md)** - Modify and extend components
+
+### Installation Presets
 
 ```bash
-# Minimal setup (Bootstrap + Alpine only)
+# Minimal (Bootstrap + Alpine only)
 php artisan bal:install --preset=minimal
 
-# Standard setup (Bootstrap + Alpine + Livewire + SASS)
+# Standard (+ Livewire + SASS)
 php artisan bal:install --preset=standard
 
-# Full setup (Everything + Authentication)
+# Full (+ Authentication)
 php artisan bal:install --preset=full
 ```
 
-### Individual Components
-
-```bash
-# Install specific components
-php artisan bal:install --bootstrap --alpine --livewire
-php artisan bal:install --sass --auth
-php artisan bal:install --bootstrap --alpine  # Just the frontend
-```
-
-### Configuration & Advanced Publishing
-
-```bash
-# Publish configuration file
-php artisan bal:publish --config
-
-# Publish stub files for customization
-php artisan bal:publish --stubs
-
-# Publish example components
-php artisan bal:publish --components
-
-# List all available vendor:publish options
-php artisan bal:publish --list
-```
-
-### Laravel-Native vendor:publish Support
-
-```bash
-# Granular resource publishing (Laravel standard)
-php artisan vendor:publish --tag=bal-kit-sass      # SASS architecture only
-php artisan vendor:publish --tag=bal-kit-auth      # Authentication views only
-php artisan vendor:publish --tag=bal-kit-layouts   # Layout templates only
-php artisan vendor:publish --tag=bal-kit-js        # JavaScript files only
-php artisan vendor:publish --tag=bal-kit-config    # Configuration only
-
-# Publish everything using Laravel's vendor:publish
-php artisan vendor:publish --provider="LaravelBalKit\BalKitServiceProvider"
-```
-
-## 🎯 What You Get
-
-### Complete Starter Kit (v1.4.10 Stable)
-
-- **Authentication Pages** - Professional login, registration, forgot password, and reset forms
-- **Admin Dashboard** - Modern dashboard with statistics cards, charts, activity feeds, and quick actions
-- **Profile Settings** - Multi-tab profile management with personal info, security, notifications, and privacy
-- **Reusable Components** - Professional Blade components (cards, buttons, alerts, modals) with extensive options
-- **Bootstrap Showcase** - Comprehensive demo page with all Bootstrap 5.3+ components and examples
-
-## 🚀 Getting Started
-
-### Step-by-Step Guide
-
-#### 1. Create New Laravel Project
-
-```bash
-composer create-project laravel/laravel my-project
-cd my-project
-```
-
-#### 2. Install BAL Kit
-
-```bash
-composer require get-tony/bal-kit
-php artisan bal:install --preset=full
-```
-
-#### 3. Install Dependencies and Build
-
-```bash
-npm install
-npm run build
-```
-
-#### 4. Start Development Server
-
-```bash
-php artisan serve
-```
-
-### Your First Page
-
-Create a simple page using BAL Kit's layout:
+### Your First Component
 
 ```blade
-{{-- resources/views/welcome.blade.php --}}
 <x-app-layout>
     <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title mb-0">Welcome to BAL Kit!</h3>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Your Bootstrap + Alpine.js + Livewire application is ready.
-                        </p>
+        <x-bal-card title="Welcome to BAL Kit!">
+            <p>Your Bootstrap + Alpine.js + Livewire application is ready.</p>
 
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-primary" onclick="BalKit.toast('Hello from BAL Kit!', 'success')">
-                                Show Toast
-                            </button>
-
-                            <button class="btn btn-outline-secondary" x-data x-on:click="$dispatch('open-modal')">
-                                Open Modal
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <x-bal-button variant="primary" onclick="BalKit.toast('Hello!', 'success')">
+                Show Toast
+            </x-bal-button>
+        </x-bal-card>
     </div>
 </x-app-layout>
 ```
 
-### Your First Livewire Component
+## 🧪 Testing & Quality Assurance
+
+### Docker Testing (Recommended)
 
 ```bash
-php artisan make:livewire Counter
+# Complete isolated testing
+./docker-test
+
+# Test specific version
+./docker-test --version "^1.5.0"
 ```
 
-```php
-{{-- app/Livewire/Counter.php --}}
-<?php
-
-use Livewire\Component;
-
-class Counter extends Component
-{
-    public int $count = 0;
-
-    public function increment()
-    {
-        $this->count++;
-    }
-
-    public function decrement()
-    {
-        $this->count--;
-    }
-
-    public function render()
-    {
-        return view('livewire.counter');
-    }
-}
-```
-
-```blade
-{{-- resources/views/livewire/counter.blade.php --}}
-<div class="card">
-    <div class="card-body text-center">
-        <h2 class="display-4 text-primary">{{ $count }}</h2>
-        <div class="btn-group" role="group">
-            <button class="btn btn-outline-danger" wire:click="decrement">-</button>
-            <button class="btn btn-outline-success" wire:click="increment">+</button>
-        </div>
-    </div>
-</div>
-```
-
-Use it in your blade file:
-
-```blade
-<livewire:counter />
-```
-
-### Professional UI Foundation
-
-- **Responsive Bootstrap 5** components out of the box
-- **System font stacks** - No external font dependencies
-- **7-1 SASS architecture** - Organized stylesheets
-- **Modern form styling** - Enhanced Bootstrap form controls
-- **Consistent spacing** - Utility classes for rapid development
-
-### JavaScript Toolkit
-
-- **Alpine.js integration** - Reactive components and data binding
-- **Bootstrap JavaScript** - All interactive components (modals, dropdowns, etc.)
-- **BAL Kit utilities** - Toast notifications, confirm dialogs, and more
-- **Livewire compatibility** - Seamless server-side components
-
-### Laravel Integration
-
-- **Professional layouts** - Application layout with Bootstrap navbar, flash messages, and footer
-- **Flash message handling** - Automatic Bootstrap alert styling for session feedback
-- **Complete authentication system** - Laravel Breeze with beautiful Bootstrap styling (air-gapped friendly)
-- **Air-gapped environment support** - No external dependencies, perfect for secure/isolated deployments
-- **Organized structure** - Livewire components with clear organization
-- **Vite configuration** - Optimized build setup with Bootstrap alias and hot reload
-
-## 🔐 Air-Gapped Authentication System
-
-BAL Kit v1.4.3+ provides a **complete, production-ready authentication system** designed specifically for air-gapped and secure environments.
-
-### ✅ What's Included
-
-- **Complete Laravel Breeze integration** - All controllers, middleware, and routes
-- **Beautiful Bootstrap styling** - Professional, responsive authentication forms
-- **Air-gapped friendly** - No external font dependencies or CDN resources
-- **Bootstrap component library** - Complete set of form components
-- **Guest and app layouts** - Consistent styling across authentication and application
-- **All authentication features** - Login, register, password reset, email verification, 2FA support
-
-### 🎯 Perfect For
-
-- **Enterprise environments** - Corporate networks with restricted internet access
-- **Government/military deployments** - High-security, isolated systems
-- **Healthcare systems** - HIPAA-compliant, secure environments
-- **Financial institutions** - Air-gapped trading systems and secure networks
-- **Industrial control systems** - Isolated SCADA and manufacturing networks
-- **Development environments** - Offline development without external dependencies
-
-### 🚀 Key Features
-
-**No External Dependencies:**
-
-- Uses system fonts (no Google Fonts or external CDNs)
-- All assets bundled locally
-- Complete offline functionality
-- No internet connection required after installation
-
-**Professional UI:**
-
-- Bootstrap 5.3+ styling throughout
-- Responsive design for all devices
-- Consistent visual hierarchy
-- Modern, clean interface
-
-**Complete Functionality:**
-
-- User registration with validation
-- Secure login with remember me
-- Password reset via email
-- Email verification
-- Profile management
-- Two-factor authentication support
-
-### 📋 Authentication Pages Included
-
-All pages are fully styled with Bootstrap and work offline:
-
-- **Login page** (`/login`) - Clean, professional login form
-- **Registration page** (`/register`) - User-friendly signup process
-- **Password reset** (`/forgot-password`) - Secure password recovery
-- **Email verification** - Account verification workflow
-- **Dashboard** (`/dashboard`) - Post-login landing page
-- **Profile settings** - User profile management
-
-### 🔧 Technical Implementation
-
-**Bootstrap Components:**
-
-- `<x-text-input>` - Bootstrap form controls
-- `<x-input-label>` - Proper form labels
-- `<x-input-error>` - Bootstrap validation feedback
-- `<x-primary-button>` - Bootstrap button styling
-- `<x-auth-session-status>` - Bootstrap alert integration
-
-**Layouts:**
-
-- `layouts/guest.blade.php` - Air-gapped authentication layout
-- `layouts/app.blade.php` - Main application layout
-- `components/auth-layout.blade.php` - Reusable auth component
-
-**Asset Pipeline:**
-
-- SASS compilation with Bootstrap integration
-- Vite configuration optimized for air-gapped environments
-- No external asset dependencies
-
-## ✅ Production Ready Status (v1.4.3)
-
-BAL Kit v1.4.3 is **production-ready** with a **complete, one-command installation** that works without manual intervention.
-
-### ✅ What Works Perfectly
-
-- **One-Command Installation**: `php artisan bal:install --preset=full` installs everything automatically
-- **Complete Authentication System**: Login, register, password reset, email verification
-- **Air-Gapped Deployment**: No external dependencies, perfect for secure environments
-- **Bootstrap Components**: All form components with proper Bootstrap styling
-- **SASS Compilation**: Complete 7-1 architecture with Bootstrap integration
-- **Livewire Integration**: Full Livewire 3 support with Bootstrap styling
-- **Alpine.js Integration**: Reactive components that work with Bootstrap
-
-### 🧪 Verified Testing
-
-**All core pages return 200 status:**
-
-- ✅ Homepage: Working perfectly
-- ✅ Login page: Working perfectly
-- ✅ Register page: Working perfectly
-- ✅ Dashboard: Proper authentication redirect
-
-**Complete asset compilation:**
-
-- ✅ CSS: 229KB Bootstrap compilation
-- ✅ JavaScript: 79KB bundle with Alpine.js and Bootstrap
-- ✅ SASS: Complete 7-1 architecture
-
-### 🔧 Recent Fixes (v1.4.3)
-
-- **Fixed component installation**: Bootstrap components now properly override Breeze Tailwind components
-- **Fixed guest layout**: Now uses SASS instead of CSS for air-gapped compatibility
-- **Fixed installation order**: Critical components installed outside try-catch blocks
-- **Enhanced error handling**: Installation continues even if Breeze encounters issues
-- **Improved test coverage**: More comprehensive post-installation verification
-
-## 🛠️ Available Commands
+### Native Testing
 
 ```bash
-# Installation and setup
-php artisan bal:install [options]     # Install BAL Kit components
-  --bootstrap                          # Install Bootstrap CSS framework
-  --alpine                             # Install Alpine.js
-  --livewire                           # Install Livewire
-  --sass                               # Setup SASS with 7-1 architecture
-  --auth                               # Install authentication scaffolding
-  --preset=minimal|standard|full       # Use preset configuration
-  --force                              # Overwrite existing files
+# Run all tests locally
+./test
 
-php artisan bal:publish [options]     # Publish resources
-  --config                             # Publish configuration file
-  --stubs                              # Publish stub files
-  --components                         # Publish example components
-  --all                                # Publish all resources
-  --force                              # Overwrite existing files
-
-# NPM scripts (added to package.json)
-npm run bal:dev                       # Start development server with hot reload
-npm run bal:build                     # Build for production
-npm run bal:preview                   # Preview production build
+# Test specific components
+./test phpunit
+./test frontend
 ```
 
-## 🎨 Usage Examples
-
-### Application Layout Features
-
-The main application layout (`resources/views/layouts/app.blade.php`) includes:
-
-- **Responsive Bootstrap navbar** with authentication links
-- **Automatic flash message display** for success, error, and validation messages
-- **Professional footer** with BAL Kit branding
-- **Flexible content slot** supporting both `$slot` and `$content` variables
-- **Livewire integration** with `@livewireStyles` and `@livewireScripts`
-- **Vite asset loading** with automatic SASS and JS compilation
-
-### Alpine.js Components
-
-BAL Kit includes pre-built Alpine.js components that work seamlessly with Bootstrap:
-
-```html
-<!-- Modal Component (uses balModal Alpine component) -->
-<div x-data="balModal()">
-    <button @click="open()" class="btn btn-primary">Open Modal</button>
-
-    <div x-show="show" class="modal fade show" style="display: block;" x-transition>
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal Title</h5>
-                    <button @click="close()" class="btn-close"></button>
-                </div>
-                <div class="modal-body">
-                    Modal content goes here...
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Tabs Component (uses balTabs Alpine component) -->
-<div x-data="balTabs(0)">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <button @click="setActive(0)" :class="isActive(0) ? 'nav-link active' : 'nav-link'">Tab 1</button>
-        </li>
-        <li class="nav-item">
-            <button @click="setActive(1)" :class="isActive(1) ? 'nav-link active' : 'nav-link'">Tab 2</button>
-        </li>
-    </ul>
-
-    <div class="tab-content">
-        <div x-show="isActive(0)" class="tab-pane">Content 1</div>
-        <div x-show="isActive(1)" class="tab-pane">Content 2</div>
-    </div>
-</div>
-
-<!-- Dropdown Component (uses balDropdown Alpine component) -->
-<div x-data="balDropdown()">
-    <button @click="toggle()" class="btn btn-secondary">
-        Dropdown <i class="bi bi-chevron-down"></i>
-    </button>
-    <div x-show="open" @click.away="close()" class="dropdown-menu show">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-    </div>
-</div>
-```
-
-### JavaScript Utilities
-
-BAL Kit provides ready-to-use JavaScript utilities:
-
-```javascript
-// Toast notifications with Bootstrap styling
-BalKit.toast('Success message!', 'success');
-BalKit.toast('Error occurred!', 'error');
-BalKit.toast('Warning message', 'warning');
-BalKit.toast('Info message', 'info');
-
-// Confirm dialogs using Bootstrap modals
-const confirmed = await BalKit.confirm('Are you sure?', 'Delete Item');
-if (confirmed) {
-    // User clicked confirm
-    console.log('User confirmed the action');
-} else {
-    // User clicked cancel
-    console.log('User cancelled the action');
-}
-```
-
-### Livewire Components
-
-```php
-// Example Livewire component using Bootstrap
-use Livewire\Component;
-
-class ContactForm extends Component
-{
-    public string $name = '';
-    public string $email = '';
-    public string $message = '';
-
-    public function submit()
-    {
-        $this->validate([
-            'name' => 'required|min:3',
-            'email' => 'required|email',
-            'message' => 'required|min:10',
-        ]);
-
-        // Process form...
-
-        session()->flash('success', 'Message sent successfully!');
-        $this->reset();
-    }
-
-    public function render()
-    {
-        return view('livewire.contact-form');
-    }
-}
-```
-
-## 🎛️ Configuration
-
-The configuration file `config/bal-kit.php` allows customization of installation options:
-
-```php
-return [
-    'install' => [
-        'bootstrap' => true,
-        'alpine' => true,
-        'livewire' => true,
-        'sass' => true,
-        'auth' => false,
-    ],
-
-    'bootstrap' => [
-        'version' => '^5.3',
-        'include_icons' => true,
-        'include_popper' => true,
-    ],
-
-    'alpine' => [
-        'version' => '^3.14',
-        'plugins' => [],
-    ],
-
-    'sass' => [
-        'architecture' => '7-1',
-        'directories' => [
-            'abstracts', 'base', 'components',
-            'layout', 'vendors'
-        ],
-    ],
-
-    'paths' => [
-        'sass' => 'resources/sass',
-        'js' => 'resources/js',
-        'views' => 'resources/views',
-        'components' => 'app/Livewire',
-    ],
-
-    'presets' => [
-        'minimal' => ['bootstrap' => true, 'alpine' => true],
-        'standard' => ['bootstrap' => true, 'alpine' => true, 'livewire' => true, 'sass' => true],
-        'full' => ['bootstrap' => true, 'alpine' => true, 'livewire' => true, 'sass' => true, 'auth' => true],
-    ],
-];
-```
-
-## 🏗️ File Structure
-
-After installation, you'll have:
-
-```
-your-laravel-app/
-├── resources/
-│   ├── sass/                    # 7-1 SASS Architecture
-│   │   ├── abstracts/          # Variables, mixins, functions
-│   │   ├── base/               # Reset, typography, base styles
-│   │   ├── components/         # Component-specific styles
-│   │   ├── layout/             # Header, footer, sidebar, forms
-│   │   ├── vendors/            # Bootstrap imports and customizations
-│   │   └── app.scss            # Main SASS entry point
-│   ├── js/
-│   │   ├── app.js              # Main JavaScript entry point
-│   │   └── bootstrap.js        # Bootstrap configuration
-│   └── views/
-│       └── layouts/
-│           └── app.blade.php   # Main application layout
-├── app/
-│   └── Livewire/              # Organized Livewire components
-│       ├── Components/
-│       └── Pages/
-└── config/
-    └── bal-kit.php            # BAL Kit configuration
-```
-
-## 🔧 Customization
-
-### SASS Customization
-
-```scss
-// resources/sass/abstracts/_variables.scss
-$primary: #your-brand-color;
-$text-font-stack: 'Your Font', system-ui, sans-serif;
-
-// Override BAL Kit variables
-$brand-color: rgb(229, 0, 80);
-$max-width: 1200px;
-
-// resources/sass/vendors/_bootstrap.scss
-// Bootstrap is imported with BAL Kit customizations
-@import "~bootstrap/scss/bootstrap";
-
-// BAL Kit customizations are applied in .bal-kit wrapper
-.bal-kit {
-  // Your additional customizations here
-}
-```
-
-### JavaScript Customization
-
-```javascript
-// resources/js/app.js
-// Add your own Alpine.js components to the alpine:init event
-document.addEventListener('alpine:init', () => {
-    Alpine.data('yourComponent', () => ({
-        // Your component logic
-        message: 'Hello World',
-        toggle() {
-            this.message = this.message === 'Hello World' ? 'Goodbye World' : 'Hello World';
-        }
-    }));
-});
-
-// Extend BalKit utilities
-BalKit.yourUtility = function(param) {
-    // Your utility function
-    console.log('Custom utility called with:', param);
-};
-
-// Available BalKit utilities:
-// BalKit.toast(message, type) - Show Bootstrap toast notifications
-// BalKit.confirm(message, title) - Show Bootstrap confirmation modal
-```
-
-## 🧪 Requirements
-
-- **PHP**: 8.2 or higher
-- **Laravel**: 10.0 or higher (supports Laravel 12)
-- **Node.js**: 18.0 or higher
-- **NPM**: 8.0 or higher
-
-## 🔧 Troubleshooting
-
-### Authentication System
-
-BAL Kit provides a **complete authentication system** using Laravel Breeze with beautiful Bootstrap styling.
-
-**What BAL Kit installs automatically:**
-
-1. **Laravel Breeze** - Complete authentication backend (controllers, middleware, routes)
-2. **Bootstrap styling** - Replaces all Tailwind components with Bootstrap equivalents
-3. **Air-gapped friendly** - No external font dependencies, works in isolated environments
-4. **Professional UI** - Beautiful, responsive authentication forms and layouts
-5. **Complete functionality** - Login, register, password reset, email verification, 2FA support
-
-**Installation is automatic** - no prompts or configuration needed:
-
-```bash
-# Full authentication system with Bootstrap styling
-php artisan bal:install --preset=full
-# That's it! Complete authentication is ready to use
-
-# Or install authentication separately
-php artisan bal:install --auth
-# Still automatic - no prompts or manual setup required
-```
-
-**What you get immediately:**
-
-- ✅ Working login, register, password reset pages
-- ✅ Beautiful Bootstrap-styled forms and layouts
-- ✅ Complete authentication controllers and middleware
-- ✅ Email verification and password confirmation
-- ✅ Professional responsive design
-
-### SASS Compilation
-
-BAL Kit uses modern SASS syntax that's compatible with Bootstrap. If you encounter compilation errors:
-
-```bash
-# Ensure all dependencies are installed
-npm install
-
-# Clear any cached builds
-npm run build
-```
-
-### JavaScript Components Not Working
-
-If Alpine.js components aren't working:
-
-1. **Check if Alpine is loaded**: Open browser console and type `Alpine`
-2. **Verify app.js is imported**: Check your main layout includes `@vite(['resources/js/app.js'])`
-3. **Rebuild assets**: Run `npm run dev` or `npm run build`
-
-### Common Issues
-
-- **`npm run dev` fails**: Ensure you're in the Laravel project directory, not the package root
-- **Missing Livewire commands**: BAL Kit v1.4.3+ automatically handles Livewire installation. If you encounter issues, run `composer require livewire/livewire` manually first
-- **Permission errors**: Ensure proper directory permissions for `resources/` and `public/` directories
-- **Components not found**: Make sure you've run `php artisan bal:install` with the appropriate preset
-- **Livewire installation fails**: If you get "There are no commands defined in the 'livewire' namespace", this is fixed in v1.4.3+. For older versions, install Livewire manually first: `composer require livewire/livewire`
-
-## 📄 License & Commercial Use
-
-**BAL Kit is proprietary software** owned by Anthony Pagan. The source code is available for evaluation purposes only.
-
-### Permitted Use
-
-- ✅ View and examine source code for evaluation
-- ✅ Personal, non-commercial testing and development
-- ✅ Fork for contributing back to the original project
-
-### Restricted Use
-
-- ❌ Production use without commercial license
-- ❌ Distribution or resale of the software
-- ❌ Commercial derivative works
-
-### Commercial Licensing
-
-For production use, commercial projects, or any commercial application, please contact [get-tony@outlook.com](mailto:get-tony@outlook.com) for licensing information.
-
-### Third-Party Components
-
-BAL Kit incorporates MIT-licensed components (Laravel, Bootstrap, Alpine.js, Symfony Process) which remain under their respective licenses. See the [LICENSE](LICENSE) file for complete details.
-
-## 🙏 Credits
-
-- **Laravel Framework** - The PHP framework for web artisans
-- **Bootstrap** - The world's most popular CSS framework
-- **Alpine.js** - Lightweight JavaScript framework
-- **Livewire** - Full-stack framework for Laravel
+**[📋 Complete Testing Guide](docs/testing.md)** - Docker and native testing options
+
+## ⚖️ License & Commercial Use
+
+**BAL Kit is proprietary software.** You may examine the source code for evaluation, but commercial use requires a license.
+
+**For production or commercial projects:** Contact [get-tony@outlook.com](mailto:get-tony@outlook.com)
+
+## 🌟 Key Features
+
+### ✅ Production Ready (v1.5.0)
+
+- **Docker Testing Environment** - Complete isolation with zero risk
+- **Air-Gapped Friendly** - No external dependencies
+- **Enterprise Security** - Perfect for secure/isolated environments
+- **Universal Compatibility** - Works with Laravel 10+, 11+, 12+
+
+### 🎨 Professional UI
+
+- **Bootstrap 5.3+** - Latest components and utilities
+- **7-1 SASS Architecture** - Organized, maintainable stylesheets
+- **Responsive Design** - Mobile-first approach
+- **System Fonts** - No external font dependencies
+
+### ⚡ Modern Stack
+
+- **Livewire 3** - Dynamic server-side components
+- **Alpine.js** - Lightweight client-side reactivity
+- **Vite Integration** - Fast builds and hot reload
+- **PHPUnit Ready** - Comprehensive test coverage
+
+## 🚀 Version 1.5.0 Highlights
+
+- 🐳 **Docker Testing Environment** - Complete isolation testing
+- 🔒 **Enhanced Security** - Non-root execution, limited permissions
+- 📏 **Consistent Results** - Same environment across all systems
+- ⚡ **Performance Optimized** - tmpfs workspace, cached volumes
+- 🛡️ **CI/CD Ready** - Simplified GitHub Actions workflow
+
+## 📞 Support & Resources
+
+### 📚 Documentation
+
+- **[Complete Documentation](docs/)** - Comprehensive guides
+- **[Installation Guide](docs/installation.md)** - Step-by-step setup
+- **[Testing Guide](docs/testing.md)** - Docker and native testing
+- **[Troubleshooting](docs/troubleshooting.md)** - Common issues
+
+### 🔗 Links
+
+- **[Packagist](https://packagist.org/packages/get-tony/bal-kit)** - Official package
+- **[GitHub](https://github.com/get-tony/bal-kit)** - Source code
+- **[Email Support](mailto:get-tony@outlook.com)** - Direct support
 
 ---
 
-**Made with ❤️ by Anthony Pagan**
-
-> The perfect alternative to TALL stack for Bootstrap lovers!
-
-## 📚 Documentation
-
-- **[Changelog](CHANGELOG.md)** - Version history and changes
-- **[License](LICENSE)** - Usage rights and restrictions
-
-## 🔗 Links
-
-- **[Packagist](https://packagist.org/packages/get-tony/bal-kit)** - Package repository
-- **[GitHub](https://github.com/get-tony/bal-kit)** - Source code
-- **[Issues](https://github.com/get-tony/bal-kit/issues)** - Bug reports and feature requests
+**Ready to get started?** Check out the [Installation Guide](docs/installation.md) or run `./docker-test` to see BAL Kit in action!

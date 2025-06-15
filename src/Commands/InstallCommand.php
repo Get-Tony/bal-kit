@@ -4,9 +4,7 @@ namespace LaravelBalKit\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Str;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class InstallCommand extends Command
 {
@@ -59,6 +57,7 @@ class InstallCommand extends Command
         // Handle preset
         if ($preset = $this->option('preset')) {
             $this->handlePreset($preset);
+
             return 0;
         }
 
@@ -68,6 +67,7 @@ class InstallCommand extends Command
         if (empty($components)) {
             $this->info('💡 No components specified. Use --bootstrap, --alpine, --livewire, --sass, or --auth');
             $this->info('   Or use a preset: --preset=minimal|standard|full');
+
             return 0;
         }
 
@@ -85,9 +85,10 @@ class InstallCommand extends Command
     {
         $presets = $this->getPresetConfigurations();
 
-        if (!isset($presets[$preset])) {
+        if (! isset($presets[$preset])) {
             $this->error("❌ Unknown preset: {$preset}");
-            $this->info('Available presets: ' . implode(', ', array_keys($presets)));
+            $this->info('Available presets: '.implode(', ', array_keys($presets)));
+
             return;
         }
 
@@ -214,13 +215,13 @@ class InstallCommand extends Command
             'vite.config.js',
             'resources/js/app.js',
             'resources/js/bootstrap.js',
-            'package.json'
+            'package.json',
         ];
 
         foreach ($filesToBackup as $file) {
             $fullPath = base_path($file);
             if ($this->files->exists($fullPath)) {
-                $backupPath = $fullPath . '.bal-kit-backup-' . date('Y-m-d-H-i-s');
+                $backupPath = $fullPath.'.bal-kit-backup-'.date('Y-m-d-H-i-s');
                 $this->files->copy($fullPath, $backupPath);
                 $this->comment("📋 Backed up {$file} to {$backupPath}");
             }
@@ -257,7 +258,7 @@ class InstallCommand extends Command
         // Remove Tailwind config files
         $tailwindFiles = [
             'tailwind.config.js',
-            'postcss.config.js'
+            'postcss.config.js',
         ];
 
         foreach ($tailwindFiles as $file) {
@@ -304,13 +305,13 @@ class InstallCommand extends Command
 
         // Always ensure app-layout and guest-layout components exist
         $appLayoutComponentPath = resource_path('views/components/app-layout.blade.php');
-        if (!$this->files->exists($appLayoutComponentPath)) {
+        if (! $this->files->exists($appLayoutComponentPath)) {
             $this->copyStub('components/app-layout.blade.php', $appLayoutComponentPath);
             $this->comment('✅ App layout component created');
         }
 
         $guestLayoutComponentPath = resource_path('views/components/guest-layout.blade.php');
-        if (!$this->files->exists($guestLayoutComponentPath)) {
+        if (! $this->files->exists($guestLayoutComponentPath)) {
             $this->copyStub('components/guest-layout.blade.php', $guestLayoutComponentPath);
             $this->comment('✅ Guest layout component created');
         }
@@ -350,7 +351,7 @@ class InstallCommand extends Command
                 'tailwindcss',
                 'postcss',
                 'autoprefixer',
-                '@tailwindcss/forms'
+                '@tailwindcss/forms',
             ];
 
             $hasUnwantedPackages = false;
@@ -381,13 +382,13 @@ class InstallCommand extends Command
         $issues = [];
 
         // Check SASS directory exists
-        if (!$this->files->isDirectory(resource_path('sass'))) {
+        if (! $this->files->isDirectory(resource_path('sass'))) {
             $issues[] = 'SASS directory missing';
             $this->installSass(); // Auto-fix
         }
 
         // Check BAL Kit JavaScript exists
-        if (!$this->files->exists(resource_path('js/bootstrap.js'))) {
+        if (! $this->files->exists(resource_path('js/bootstrap.js'))) {
             $issues[] = 'BAL Kit JavaScript missing';
             $this->installJavaScript(); // Auto-fix
         }
@@ -424,21 +425,21 @@ class InstallCommand extends Command
 
         // Check auth-layout component exists
         $authLayoutPath = resource_path('views/components/auth-layout.blade.php');
-        if (!$this->files->exists($authLayoutPath)) {
+        if (! $this->files->exists($authLayoutPath)) {
             $issues[] = 'Auth layout component missing';
             $this->copyStub('layouts/auth.blade.php', $authLayoutPath); // Auto-fix
         }
 
         // Check app-layout component exists
         $appLayoutPath = resource_path('views/components/app-layout.blade.php');
-        if (!$this->files->exists($appLayoutPath)) {
+        if (! $this->files->exists($appLayoutPath)) {
             $issues[] = 'App layout component missing';
             $this->copyStub('components/app-layout.blade.php', $appLayoutPath); // Auto-fix
         }
 
         // Check guest-layout component exists
         $guestLayoutPath = resource_path('views/components/guest-layout.blade.php');
-        if (!$this->files->exists($guestLayoutPath)) {
+        if (! $this->files->exists($guestLayoutPath)) {
             $issues[] = 'Guest layout component missing';
             $this->copyStub('components/guest-layout.blade.php', $guestLayoutPath); // Auto-fix
         }
@@ -446,7 +447,7 @@ class InstallCommand extends Command
         if (empty($issues)) {
             $this->info('✅ All checks passed! BAL Kit is properly installed.');
         } else {
-            $this->info('🔧 Auto-fixed ' . count($issues) . ' issues:');
+            $this->info('🔧 Auto-fixed '.count($issues).' issues:');
             foreach ($issues as $issue) {
                 $this->comment("  - {$issue}");
             }
@@ -515,7 +516,7 @@ class InstallCommand extends Command
             $composerJson = json_decode($this->files->get(base_path('composer.json')), true);
             $hasLivewire = isset($composerJson['require']['livewire/livewire']);
 
-            if (!$hasLivewire) {
+            if (! $hasLivewire) {
                 $this->info('📦 Installing Livewire package...');
                 $this->runProcess('composer require livewire/livewire');
 
@@ -544,7 +545,7 @@ class InstallCommand extends Command
         try {
             // Check if livewire commands are available
             $availableCommands = array_keys($this->getApplication()->all());
-            $livewireCommands = array_filter($availableCommands, function($cmd) {
+            $livewireCommands = array_filter($availableCommands, function ($cmd) {
                 return strpos($cmd, 'livewire:') === 0;
             });
 
@@ -575,7 +576,7 @@ class InstallCommand extends Command
         // Create SASS directory structure
         $sassPath = resource_path('sass');
         $directories = config('bal-kit.sass.directories', [
-            'abstracts', 'base', 'components', 'layout', 'pages', 'themes', 'vendors'
+            'abstracts', 'base', 'components', 'layout', 'pages', 'themes', 'vendors',
         ]);
 
         foreach ($directories as $dir) {
@@ -615,7 +616,7 @@ class InstallCommand extends Command
             $hasBreeze = isset($composerJson['require-dev']['laravel/breeze']) ||
                         isset($composerJson['require']['laravel/breeze']);
 
-            if (!$hasBreeze) {
+            if (! $hasBreeze) {
                 $this->info('📦 Installing Laravel Breeze...');
                 $this->runProcess('composer require laravel/breeze --dev');
             } else {
@@ -637,7 +638,7 @@ class InstallCommand extends Command
             $this->runProcess('npm uninstall tailwindcss postcss autoprefixer @tailwindcss/forms');
             $this->runProcess('npm install bootstrap @popperjs/core alpinejs');
 
-                        // Replace Breeze authentication views with BAL Kit Bootstrap versions
+            // Replace Breeze authentication views with BAL Kit Bootstrap versions
             $this->info('🎨 Installing BAL Kit Bootstrap authentication views...');
 
             // Use guest-layout compatible versions for Breeze
@@ -715,7 +716,7 @@ class InstallCommand extends Command
     {
         $routesPath = base_path('routes/web.php');
 
-        if (!$this->files->exists($routesPath)) {
+        if (! $this->files->exists($routesPath)) {
             return;
         }
 
@@ -748,7 +749,7 @@ class InstallCommand extends Command
     {
         $packageJsonPath = base_path('package.json');
 
-        if (!$this->files->exists($packageJsonPath)) {
+        if (! $this->files->exists($packageJsonPath)) {
             return;
         }
 
@@ -789,7 +790,7 @@ class InstallCommand extends Command
     {
         $layoutPath = resource_path('views/layouts/app.blade.php');
 
-        if (!$this->files->exists($layoutPath) || $this->option('force')) {
+        if (! $this->files->exists($layoutPath) || $this->option('force')) {
             $this->copyStub('layouts/app.blade.php', $layoutPath);
             $this->info('🎨 Created application layout');
         }
@@ -804,9 +805,9 @@ class InstallCommand extends Command
      */
     protected function copyStubs(string $stubDir, string $destination): void
     {
-        $stubPath = __DIR__ . "/../Stubs/{$stubDir}";
+        $stubPath = __DIR__."/../Stubs/{$stubDir}";
 
-        if (!$this->files->isDirectory($stubPath)) {
+        if (! $this->files->isDirectory($stubPath)) {
             return;
         }
 
@@ -826,7 +827,7 @@ class InstallCommand extends Command
      */
     protected function copyStub(string $stub, string $destination): void
     {
-        $stubPath = __DIR__ . "/../Stubs/{$stub}";
+        $stubPath = __DIR__."/../Stubs/{$stub}";
 
         if ($this->files->exists($stubPath)) {
             $this->files->ensureDirectoryExists(dirname($destination));
@@ -842,7 +843,7 @@ class InstallCommand extends Command
         $process = Process::fromShellCommandline($command, base_path());
         $process->run();
 
-        if (!$process->isSuccessful()) {
+        if (! $process->isSuccessful()) {
             $this->warn("Command failed: {$command}");
         }
     }
@@ -893,7 +894,7 @@ class InstallCommand extends Command
 
         // Backup existing welcome page if it exists
         if ($this->files->exists($welcomePath)) {
-            $backupPath = $welcomePath . '.laravel-original-' . date('Y-m-d-H-i-s');
+            $backupPath = $welcomePath.'.laravel-original-'.date('Y-m-d-H-i-s');
             $this->files->copy($welcomePath, $backupPath);
             $this->comment("📋 Backed up original welcome page to {$backupPath}");
         }
@@ -919,7 +920,7 @@ class InstallCommand extends Command
             'primary-button.blade.php',
             'auth-session-status.blade.php',
             'app-layout.blade.php',
-            'guest-layout.blade.php'
+            'guest-layout.blade.php',
         ];
 
         foreach ($components as $component) {
@@ -970,7 +971,7 @@ class InstallCommand extends Command
             $this->warn('❌ App layout test failed - file missing');
         }
 
-                // Test 3: Check if auth components exist (only if auth was installed)
+        // Test 3: Check if auth components exist (only if auth was installed)
         $loginPath = resource_path('views/auth/login.blade.php');
         if ($this->files->exists($loginPath)) {
             $totalTests++;

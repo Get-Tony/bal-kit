@@ -12,7 +12,7 @@ use LaravelBalKit\Commands\PublishCommand;
  * Bootstrap + Alpine.js + Livewire toolkit for Laravel
  * Provides installation commands and resource publishing
  *
- * @version 1.4.10
+ * @version {@see Version::VERSION}
  */
 class BalKitServiceProvider extends ServiceProvider
 {

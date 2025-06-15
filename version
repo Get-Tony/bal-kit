@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# BAL Kit Version Wrapper
+# Convenient access to version management functionality
+
+if [ "$1" = "update" ]; then
+    exec "$(dirname "$0")/scripts/version/update-version-refs.sh" "${@:2}"
+else
+    exec php "$(dirname "$0")/scripts/version/version.php" "$@"
+fi

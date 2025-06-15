@@ -5,6 +5,230 @@ All notable changes to BAL Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2025-01-27
+
+### 🐳 Added - Docker Testing Environment (Complete Isolation)
+
+**Major Feature**: Added comprehensive Docker-based testing solution for complete isolation from user's local environment.
+
+### 📚 Added - Professional Documentation Structure
+
+**Major Enhancement**: Restructured documentation for professional presentation and better user experience.
+
+#### **Documentation Architecture**
+
+**🎯 Streamlined Main README:**
+
+- **✅ Professional Focus**: Clean, concise presentation for decision makers and evaluators
+- **✅ Key Information Only**: Essential installation, features, and links without overwhelming detail
+- **✅ Production-Ready Appearance**: Professional presentation suitable for enterprise evaluation
+- **✅ Clear Value Proposition**: Focused messaging about BAL Kit's benefits and capabilities
+
+**📚 Comprehensive Documentation Directory (`docs/`):**
+
+- **✅ `docs/installation.md`**: Complete installation guide with all options, requirements, and step-by-step instructions
+- **✅ `docs/configuration.md`**: Comprehensive configuration options, environment variables, and customization settings
+- **✅ `docs/usage-examples.md`**: Practical code examples, component usage patterns, and integration examples
+- **✅ `docs/customization.md`**: SASS customization, component modification, theming, and advanced customization
+- **✅ `docs/testing.md`**: Docker and native testing guides, PHPUnit integration, and CI/CD setup
+- **✅ `docs/version-management.md`**: Centralized version system documentation and release management
+- **✅ `docs/troubleshooting.md`**: Common issues, solutions, debugging tips, and support information
+- **✅ `docs/README.md`**: Documentation index with role-based navigation and quick access
+
+#### **Professional Benefits**
+
+**🎯 Role-Based Access:**
+
+- **System Administrators**: Quick access to requirements, security, and deployment information
+- **Web Developers**: Component examples, usage patterns, and customization guides
+- **DevOps Engineers**: Testing, CI/CD, version management, and automation documentation
+
+**📈 Enhanced User Experience:**
+
+- **✅ Faster Evaluation**: Key information immediately accessible without scrolling through technical details
+- **✅ Comprehensive Coverage**: All technical information available in organized, dedicated sections
+- **✅ Professional Presentation**: Clean, organized appearance suitable for business evaluation
+- **✅ Cross-Referenced Navigation**: Seamless movement between related topics
+
+**🔧 Developer-Friendly Features:**
+
+- **✅ Copy-Paste Examples**: Working code examples throughout all documentation
+- **✅ Multiple Approaches**: Different solutions for different needs and preferences
+- **✅ Best Practices**: Professional recommendations and proven patterns
+- **✅ Comprehensive Troubleshooting**: Detailed problem-solving guides and support information
+
+#### **Content Organization**
+
+**📖 Main README Sections:**
+
+- Project overview and value proposition
+- Quick start with essential commands
+- Key features and capabilities
+- System requirements
+- Documentation links
+- Testing overview
+- License and support information
+
+**📚 Detailed Documentation Sections:**
+
+- **Installation**: All presets, individual components, advanced publishing, Laravel integration
+- **Configuration**: Environment variables, customization options, security settings, performance tuning
+- **Usage**: Component examples, Livewire integration, Alpine.js patterns, JavaScript utilities
+- **Customization**: SASS architecture, component modification, theming, layout customization
+- **Testing**: Docker environment, native testing, PHPUnit integration, CI/CD workflows
+- **Version Management**: Centralized system, CLI tools, automation, release processes
+- **Troubleshooting**: Installation issues, frontend problems, component issues, debugging tips
+
+This restructure provides a professional, organized documentation experience that appeals to both technical users and decision makers while maintaining comprehensive coverage of all BAL Kit features and capabilities.
+
+#### **New Organized Structure**
+
+**🗂️ Scripts Directory (`scripts/`):**
+
+- **✅ `scripts/docker/`**: Docker testing environment
+  - `Dockerfile.testing`: Complete Docker environment with PHP 8.2, Composer, Node.js
+  - `docker-compose.test.yml`: Orchestration for easy container management
+  - `docker-test.sh`: Docker-specific test script optimized for containers
+  - `docker-test-runner.sh`: User-friendly Docker test wrapper
+  - `.dockerignore`: Optimized build context for faster builds
+- **✅ `scripts/testing/`**: Native testing tools
+  - `local-test.sh`: Enhanced native testing script with improved error handling
+- **✅ `scripts/version/`**: Version management system
+  - `version.php`: Version helper script for shell scripts and CI/CD
+  - `update-version-refs.sh`: Automated version reference updater
+
+**🔧 Root Convenience Scripts:**
+
+- **✅ `test`**: Wrapper for native testing (`./test` → `scripts/testing/local-test.sh`)
+- **✅ `docker-test`**: Wrapper for Docker testing (`./docker-test` → `scripts/docker/docker-test-runner.sh`)
+- **✅ `version`**: Wrapper for version management (`./version` → `scripts/version/version.php`)
+
+**📁 Core Package:**
+
+- **✅ `src/Version.php`**: Centralized version management class (single source of truth)
+
+#### **Docker Testing Features**
+
+**🔒 Complete Isolation:**
+
+- Tests run in containers, protecting user's local environment
+- Zero risk to local PHP/Composer/Node installations
+- Source code mounted read-only for maximum safety
+
+**📏 Consistent Environment:**
+
+- PHP 8.2.28, Composer 2.8.9, Node.js v18.19.0 for everyone
+- Reproducible results across different local environments
+- Eliminates "works on my machine" issues
+
+**⚡ Performance Optimized:**
+
+- tmpfs for test workspace (fast I/O)
+- Cached volumes for dependencies
+- Optimized .dockerignore for faster builds
+
+**🛡️ Security Features:**
+
+- Non-root user execution
+- Limited container permissions
+- Read-only source mounts
+
+#### **Usage Examples**
+
+```bash
+# Docker Testing (Recommended - Complete Isolation)
+./docker-test-runner.sh                    # Run all tests
+./docker-test-runner.sh phpunit            # PHPUnit tests only
+./docker-test-runner.sh --version "1.4.8"  # Test specific version
+./docker-test-runner.sh shell              # Interactive debugging
+./docker-test-runner.sh clean              # Cleanup resources
+
+# Native Testing (Requires Local Dependencies)
+./local-test.sh                            # Run all tests locally
+./local-test.sh phpunit                    # PHPUnit tests only
+```
+
+#### **Prerequisites**
+
+- **Docker Testing**: Only Docker required (no local PHP/Composer/Node needed)
+- **Native Testing**: PHP 8.2+, Composer, Node.js/NPM
+
+#### **Testing Validation**
+
+- **✅ Docker Environment**: All required tools available and validated
+- **✅ PHP Syntax**: 100% success rate for source and test file validation
+- **✅ PHPUnit Tests**: Unit tests passing in isolated environment
+- **✅ Composer Dependencies**: Package installation and security audit
+- **✅ Build/Run/Cleanup**: Complete lifecycle tested and working
+
+#### **Benefits for Users**
+
+- **🔒 Safety**: No risk to local development environment
+- **🛡️ Protection**: Complete isolation from host system
+- **📏 Consistency**: Same results across all systems
+- **🔄 Reproducibility**: Identical Docker environment for everyone
+- **⚡ Performance**: Optimized with caching and tmpfs
+- **🎯 Focus**: Test without worrying about local environment conflicts
+
+#### **Centralized Version Management**
+
+**🔧 Single Source of Truth:**
+
+- **✅ `Version.php` Class**: All version information centralized in one place
+- **✅ Packagist Compatibility**: Removed version from composer.json (uses Git tags)
+- **✅ Automated Updates**: Scripts automatically read from centralized version
+- **✅ Version Helper**: CLI tool for shell scripts and CI/CD integration
+
+**🛠️ Version Management Tools:**
+
+```bash
+# Get current version
+./version
+
+# Get Composer constraint
+./version constraint
+
+# Get all version info
+./version info
+
+# Update all documentation references
+./version update
+```
+
+**📏 Benefits:**
+
+- **✅ No More Manual Updates**: Version changes in one place only
+- **✅ Consistency**: All scripts and docs use same version source
+- **✅ Packagist Best Practice**: Git tags determine package versions
+- **✅ Automation**: Scripts automatically stay in sync
+
+#### **Organized Script Structure**
+
+**🗂️ Clean Organization:**
+
+- **✅ Logical Grouping**: Scripts organized by purpose (docker/, testing/, version/)
+- **✅ Clean Root**: Only essential files and convenient wrappers in root directory
+- **✅ Easy Discovery**: Clear directory structure for different script types
+- **✅ Maintainable**: Related files grouped together for easier maintenance
+
+**🔧 Convenient Access:**
+
+- **✅ Simple Commands**: `./test`, `./docker-test`, `./version` for common operations
+- **✅ Backward Compatible**: All functionality preserved with cleaner interface
+- **✅ Developer Friendly**: Intuitive commands without complex paths
+
+#### **Documentation Updates**
+
+- **✅ README.md**: Added comprehensive Docker testing documentation
+- **✅ Usage Examples**: Both Docker and native testing approaches
+- **✅ Prerequisites**: Clear requirements for each testing method
+- **✅ Benefits**: Detailed explanation of Docker isolation advantages
+- **✅ Version Management**: Centralized system documentation
+
+This major addition provides the ultimate testing solution with complete isolation and safety for users' local environments, plus a robust version management system.
+
+---
+
 ## [1.4.10] - 2025-06-15
 
 ### 🔧 Changed - Simplified CI/CD for Reliability

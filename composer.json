@@ -1,6 +1,5 @@
 {
     "name": "get-tony/bal-kit",
-    "version": "1.4.10",
     "description": "Complete BAL Kit starter for Laravel - Bootstrap + Alpine.js + Livewire with air-gapped authentication system, professional UI components, and 7-1 SASS architecture. Perfect for enterprise and secure environments.",
     "keywords": [
         "laravel",
@@ -36,6 +35,7 @@
         "symfony/process": "^6.0|^7.0"
     },
     "require-dev": {
+        "laravel/pint": "^1.22",
         "orchestra/testbench": "^8.0|^9.0|^10.0",
         "phpunit/phpunit": "^10.0|^11.0"
     },
