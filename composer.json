@@ -1,7 +1,7 @@
 {
     "name": "get-tony/bal-kit",
     "version": "1.4.0",
-    "description": "Complete BAL Kit starter for Laravel - Bootstrap + Alpine.js + Livewire with authentication pages, dashboard, profile settings, reusable components, and 7-1 SASS architecture",
+    "description": "Complete BAL Kit starter for Laravel - Bootstrap + Alpine.js + Livewire with air-gapped authentication system, professional UI components, and 7-1 SASS architecture. Perfect for enterprise and secure environments.",
     "keywords": [
         "laravel",
         "bootstrap",
@@ -14,7 +14,12 @@
         "components",
         "starter",
         "tall-stack",
-        "frontend"
+        "frontend",
+        "air-gapped",
+        "enterprise",
+        "secure",
+        "authentication",
+        "offline"
     ],
     "license": "proprietary",
     "authors": [

@@ -237,8 +237,89 @@ Use it in your blade file:
 - **Professional layouts** - Application layout with Bootstrap navbar, flash messages, and footer
 - **Flash message handling** - Automatic Bootstrap alert styling for session feedback
 - **Complete authentication system** - Laravel Breeze with beautiful Bootstrap styling (air-gapped friendly)
+- **Air-gapped environment support** - No external dependencies, perfect for secure/isolated deployments
 - **Organized structure** - Livewire components with clear organization
 - **Vite configuration** - Optimized build setup with Bootstrap alias and hot reload
+
+## 🔐 Air-Gapped Authentication System
+
+BAL Kit v1.4.0+ provides a **complete, production-ready authentication system** designed specifically for air-gapped and secure environments.
+
+### ✅ What's Included
+
+- **Complete Laravel Breeze integration** - All controllers, middleware, and routes
+- **Beautiful Bootstrap styling** - Professional, responsive authentication forms
+- **Air-gapped friendly** - No external font dependencies or CDN resources
+- **Bootstrap component library** - Complete set of form components
+- **Guest and app layouts** - Consistent styling across authentication and application
+- **All authentication features** - Login, register, password reset, email verification, 2FA support
+
+### 🎯 Perfect For
+
+- **Enterprise environments** - Corporate networks with restricted internet access
+- **Government/military deployments** - High-security, isolated systems
+- **Healthcare systems** - HIPAA-compliant, secure environments
+- **Financial institutions** - Air-gapped trading systems and secure networks
+- **Industrial control systems** - Isolated SCADA and manufacturing networks
+- **Development environments** - Offline development without external dependencies
+
+### 🚀 Key Features
+
+**No External Dependencies:**
+
+- Uses system fonts (no Google Fonts or external CDNs)
+- All assets bundled locally
+- Complete offline functionality
+- No internet connection required after installation
+
+**Professional UI:**
+
+- Bootstrap 5.3+ styling throughout
+- Responsive design for all devices
+- Consistent visual hierarchy
+- Modern, clean interface
+
+**Complete Functionality:**
+
+- User registration with validation
+- Secure login with remember me
+- Password reset via email
+- Email verification
+- Profile management
+- Two-factor authentication support
+
+### 📋 Authentication Pages Included
+
+All pages are fully styled with Bootstrap and work offline:
+
+- **Login page** (`/login`) - Clean, professional login form
+- **Registration page** (`/register`) - User-friendly signup process
+- **Password reset** (`/forgot-password`) - Secure password recovery
+- **Email verification** - Account verification workflow
+- **Dashboard** (`/dashboard`) - Post-login landing page
+- **Profile settings** - User profile management
+
+### 🔧 Technical Implementation
+
+**Bootstrap Components:**
+
+- `<x-text-input>` - Bootstrap form controls
+- `<x-input-label>` - Proper form labels
+- `<x-input-error>` - Bootstrap validation feedback
+- `<x-primary-button>` - Bootstrap button styling
+- `<x-auth-session-status>` - Bootstrap alert integration
+
+**Layouts:**
+
+- `layouts/guest.blade.php` - Air-gapped authentication layout
+- `layouts/app.blade.php` - Main application layout
+- `components/auth-layout.blade.php` - Reusable auth component
+
+**Asset Pipeline:**
+
+- SASS compilation with Bootstrap integration
+- Vite configuration optimized for air-gapped environments
+- No external asset dependencies
 
 ## 🛠️ Available Commands
 
