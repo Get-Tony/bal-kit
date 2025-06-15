@@ -12,7 +12,7 @@ use LaravelBalKit\Commands\PublishCommand;
  * Bootstrap + Alpine.js + Livewire toolkit for Laravel
  * Provides installation commands and resource publishing
  *
- * @version 1.2.1
+ * @version 1.4.6
  */
 class BalKitServiceProvider extends ServiceProvider
 {
@@ -54,17 +54,52 @@ class BalKitServiceProvider extends ServiceProvider
      */
     protected function registerPublishables(): void
     {
-        // Publish configuration file
+        // Configuration file
         $this->publishes([
             __DIR__.'/../config/bal-kit.php' => config_path('bal-kit.php'),
         ], 'bal-kit-config');
 
-        // Publish stub files (SASS, JS, layouts)
+        // SASS Architecture (7-1 structure)
+        $this->publishes([
+            __DIR__.'/Stubs/sass' => resource_path('sass'),
+        ], 'bal-kit-sass');
+
+        // JavaScript files
+        $this->publishes([
+            __DIR__.'/Stubs/js' => resource_path('js'),
+        ], 'bal-kit-js');
+
+        // Layout templates
+        $this->publishes([
+            __DIR__.'/Stubs/layouts' => resource_path('views/layouts'),
+        ], 'bal-kit-layouts');
+
+        // Component templates
+        $this->publishes([
+            __DIR__.'/Stubs/components' => resource_path('views/components'),
+        ], 'bal-kit-components');
+
+        // Authentication views
+        $this->publishes([
+            __DIR__.'/Stubs/auth' => resource_path('views/auth'),
+        ], 'bal-kit-auth');
+
+        // Example pages
+        $this->publishes([
+            __DIR__.'/Stubs/pages' => resource_path('views'),
+        ], 'bal-kit-pages');
+
+        // Vite configuration
+        $this->publishes([
+            __DIR__.'/Stubs/vite.config.js' => base_path('vite.config.js'),
+        ], 'bal-kit-vite');
+
+        // All stub files (for manual installation)
         $this->publishes([
             __DIR__.'/Stubs' => base_path('stubs/bal-kit'),
         ], 'bal-kit-stubs');
 
-        // Publish all resources
+        // Everything (config + stubs) - default when using provider
         $this->publishes([
             __DIR__.'/../config/bal-kit.php' => config_path('bal-kit.php'),
             __DIR__.'/Stubs' => base_path('stubs/bal-kit'),

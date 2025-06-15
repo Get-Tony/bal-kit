@@ -5,6 +5,47 @@ All notable changes to BAL Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.6] - 2025-06-15
+
+### 🔧 Enhanced - Laravel-Native vendor:publish Support
+
+**Feature Added**: Enhanced vendor:publish support with granular resource publishing tags for advanced users.
+
+#### **What's New**
+
+- **✅ Granular Publishing Tags**: Added comprehensive vendor:publish tags for specific resource types
+  - `bal-kit-sass` - SASS architecture (7-1 structure)
+  - `bal-kit-js` - JavaScript files
+  - `bal-kit-layouts` - Layout templates
+  - `bal-kit-components` - Blade component templates
+  - `bal-kit-auth` - Authentication views
+  - `bal-kit-pages` - Example pages
+  - `bal-kit-vite` - Vite configuration
+  - `bal-kit-config` - Configuration file only
+- **✅ Enhanced bal:publish Command**: Added `--list` option to show all available vendor:publish tags
+- **✅ Laravel Standard Compliance**: Full support for Laravel's native vendor:publish system
+- **✅ Documentation Updates**: Comprehensive documentation of all publishing options
+
+#### **Usage Examples**
+
+```bash
+# Quick installation (recommended)
+php artisan bal:install --preset=full
+
+# Advanced granular control
+php artisan vendor:publish --tag=bal-kit-sass
+php artisan vendor:publish --tag=bal-kit-auth --force
+php artisan bal:publish --list  # Show all options
+```
+
+#### **Backward Compatibility**
+
+- ✅ All existing `bal:install` commands work unchanged
+- ✅ Existing `bal:publish` commands enhanced, not replaced
+- ✅ No breaking changes to current workflows
+
+---
+
 ## [1.4.5] - 2025-06-15
 
 ### 🔧 Fixed - Full Preset Authentication

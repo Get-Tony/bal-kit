@@ -4,11 +4,11 @@
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/get-tony/bal-kit/blob/main/LICENSE)
 [![Laravel](https://img.shields.io/badge/Laravel-10%2B%20%7C%2012-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
-[![Version](https://img.shields.io/badge/Version-1.4.5%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.5)
+[![Version](https://img.shields.io/badge/Version-1.4.6%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.4.6)
 
 A complete Laravel starter kit with **Bootstrap**, **Alpine.js**, and **Livewire** featuring authentication pages, admin dashboard, profile settings, and reusable components - the perfect alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
 
-## 🎉 **Version 1.4.5 - Full Preset Fixed**
+## 🎉 **Version 1.4.6 - Laravel-Native Publishing**
 
 **This is the first stable, production-ready release of BAL Kit.** All previous versions have been deprecated and removed due to critical issues. This release represents a complete overhaul with comprehensive testing and validation.
 
@@ -94,7 +94,7 @@ php artisan bal:install --sass --auth
 php artisan bal:install --bootstrap --alpine  # Just the frontend
 ```
 
-### Configuration
+### Configuration & Advanced Publishing
 
 ```bash
 # Publish configuration file
@@ -105,11 +105,28 @@ php artisan bal:publish --stubs
 
 # Publish example components
 php artisan bal:publish --components
+
+# List all available vendor:publish options
+php artisan bal:publish --list
+```
+
+### Laravel-Native vendor:publish Support
+
+```bash
+# Granular resource publishing (Laravel standard)
+php artisan vendor:publish --tag=bal-kit-sass      # SASS architecture only
+php artisan vendor:publish --tag=bal-kit-auth      # Authentication views only
+php artisan vendor:publish --tag=bal-kit-layouts   # Layout templates only
+php artisan vendor:publish --tag=bal-kit-js        # JavaScript files only
+php artisan vendor:publish --tag=bal-kit-config    # Configuration only
+
+# Publish everything using Laravel's vendor:publish
+php artisan vendor:publish --provider="LaravelBalKit\BalKitServiceProvider"
 ```
 
 ## 🎯 What You Get
 
-### Complete Starter Kit (v1.4.5 Stable)
+### Complete Starter Kit (v1.4.6 Stable)
 
 - **Authentication Pages** - Professional login, registration, forgot password, and reset forms
 - **Admin Dashboard** - Modern dashboard with statistics cards, charts, activity feeds, and quick actions
