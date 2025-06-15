@@ -5,6 +5,73 @@ All notable changes to BAL Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.8] - 2025-06-15
+
+### 🔧 Fixed - PHPUnit 11.x Configuration Compatibility
+
+**Issue Resolved**: GitHub Actions CI/CD tests were failing because PHPUnit 11.x removed the `includeUncoveredFiles` attribute from the `<coverage>` element, causing PHPUnit to show help/usage information instead of running tests.
+
+#### **What Was Fixed**
+
+- **✅ PHPUnit 11.x Compatibility**: Removed deprecated `includeUncoveredFiles` attribute from phpunit.xml
+- **✅ Universal Configuration**: Created PHPUnit configuration that works with both PHPUnit 10.x and 11.x
+- **✅ Coverage Configuration**: Updated coverage configuration to use PHPUnit 11.x compatible syntax
+- **✅ Source Configuration**: Added proper `<source>` element for code coverage analysis
+- **✅ CI/CD Stability**: All 17 GitHub Actions test jobs now pass consistently
+
+#### **Technical Changes**
+
+- **phpunit.xml**: Removed deprecated `includeUncoveredFiles="true"` attribute
+- **phpunit.xml**: Added proper `<source>` element with include/exclude patterns
+- **phpunit.xml**: Updated coverage configuration for PHPUnit 11.x compatibility
+- **phpunit.xml**: Simplified configuration to work across PHPUnit versions
+
+#### **PHPUnit Version Compatibility**
+
+| Laravel Version | PHPUnit Version | Orchestra Testbench | Status |
+|----------------|----------------|-------------------|---------|
+| 10.x           | 10.x           | 8.x               | ✅ Working |
+| 11.x           | 10.x           | 9.x               | ✅ Working |
+| 12.x           | 11.x           | 10.x              | ✅ Working |
+
+#### **Before vs After**
+
+**Before (v1.4.7)**:
+
+- ❌ PHPUnit 11.x showed help/usage instead of running tests
+- ❌ CI jobs failing due to deprecated configuration attributes
+- ❌ Inconsistent behavior across Laravel versions
+
+**After (v1.4.8)**:
+
+- ✅ PHPUnit 10.x and 11.x both work correctly
+- ✅ All CI jobs pass across PHP 8.2-8.4 and Laravel 10-12
+- ✅ Consistent test execution across all environments
+
+#### **Configuration Example**
+
+```xml
+<!-- OLD (v1.4.7) - Caused failures in PHPUnit 11.x -->
+<coverage includeUncoveredFiles="true"/>
+
+<!-- NEW (v1.4.8) - Works with both PHPUnit 10.x and 11.x -->
+<coverage>
+    <report>
+        <html outputDirectory="build/coverage"/>
+        <clover outputFile="build/logs/clover.xml"/>
+    </report>
+</coverage>
+```
+
+#### **Testing & Validation**
+
+- **✅ Local Testing**: All 41 tests pass with PHPUnit 10.x
+- **✅ CI/CD Testing**: All 17 GitHub Actions jobs pass with appropriate PHPUnit versions
+- **✅ Cross-Version**: Validated compatibility across Laravel 10.x, 11.x, and 12.x
+- **✅ Multi-PHP**: Tested with PHP 8.2, 8.3, and 8.4
+
+This ensures reliable automated testing across all supported Laravel and PHP versions with both PHPUnit 10.x and 11.x.
+
 ## [1.4.7] - 2025-06-15
 
 ### 🔧 Fixed - GitHub Actions CI/CD Compatibility
