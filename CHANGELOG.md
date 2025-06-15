@@ -5,6 +5,47 @@ All notable changes to BAL Kit will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.2] - 2025-01-27
+
+### 🔧 Fixed - Breeze Integration Fix
+
+**Critical Bug Fix**: Resolved Breeze installation conflicts with BAL Kit's SASS architecture.
+
+#### **Installation Fixes**
+
+- **✅ CSS Directory Error**: Fixed "Failed to open stream" error when Breeze tries to copy to non-existent `resources/css/app.css`
+- **✅ Temporary Directory Creation**: Added temporary CSS directory creation during Breeze installation process
+- **✅ Proper Cleanup**: Enhanced cleanup process to remove temporary files while preserving SASS architecture
+- **✅ SASS Compatibility**: Ensured BAL Kit's SASS-first approach works seamlessly with Breeze integration
+
+#### **User Experience Improvements**
+
+- **✅ Error Message Clarity**: Removed misleading instructions to run `php artisan breeze:install blade` manually
+- **✅ Clear Warnings**: Added explicit warnings about not using Breeze commands directly
+- **✅ Better Guidance**: Updated error handling to guide users toward BAL Kit's integrated approach
+- **✅ Documentation Updates**: Added "Important Notes" section to README warning about manual Breeze installation
+
+#### **Authentication System**
+
+- **✅ Bootstrap Integration**: Fixed authentication views to properly use Bootstrap styling instead of Tailwind
+- **✅ Layout Consistency**: Ensured BAL Kit layouts are properly restored after Breeze installation
+- **✅ Component Compatibility**: Fixed component installation order to prevent conflicts
+- **✅ Asset Pipeline**: Resolved Vite configuration conflicts between CSS and SASS approaches
+
+#### **Technical Improvements**
+
+- **✅ Installation Process**: Improved installation phase ordering to handle Breeze integration gracefully
+- **✅ File Management**: Enhanced backup and restore functionality for critical files
+- **✅ Conflict Resolution**: Added automatic detection and resolution of Tailwind/Bootstrap conflicts
+- **✅ Build Process**: Fixed `npm run build` failures caused by missing CSS files
+
+#### **Benefits**
+
+- **🚀 Seamless Installation**: `php artisan bal:install --preset=full` now completes without errors
+- **🛡️ Conflict Prevention**: Automatic detection and prevention of CSS/SASS conflicts
+- **📚 Clear Documentation**: Users no longer receive misleading installation instructions
+- **⚡ Faster Debugging**: Improved error messages help users understand and resolve issues quickly
+
 ## [1.5.1] - 2025-01-27
 
 ### 🔄 Changed - Streamlined Testing

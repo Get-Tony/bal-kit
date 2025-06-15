@@ -4,7 +4,7 @@
 [![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](https://github.com/get-tony/bal-kit/blob/main/LICENSE)
 [![Laravel](https://img.shields.io/badge/Laravel-10%2B%20%7C%2012-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-blue.svg)](https://php.net)
-[![Version](https://img.shields.io/badge/Version-1.5.1%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.5.1)
+[![Version](https://img.shields.io/badge/Version-1.5.2%20Stable-green.svg)](https://github.com/get-tony/bal-kit/releases/tag/v1.5.2)
 
 A production-ready Laravel starter kit with **Bootstrap 5**, **Alpine.js**, and **Livewire 3** - the professional alternative to TALL stack for developers who prefer Bootstrap over Tailwind CSS.
 
@@ -114,6 +114,12 @@ php artisan bal:install --preset=full
 
 **[📋 Complete Testing Guide](docs/testing.md)** - Comprehensive testing documentation
 
+## ⚠️ Important Notes
+
+- **Do not run `php artisan breeze:install` manually** - BAL Kit handles authentication setup automatically with the `--preset=full` option
+- **Use SASS, not CSS** - BAL Kit uses a 7-1 SASS architecture instead of plain CSS files
+- **Bootstrap over Tailwind** - BAL Kit is designed as a Bootstrap alternative to TALL stack packages
+
 ## ⚖️ License & Commercial Use
 
 **BAL Kit is proprietary software.** You may examine the source code for evaluation, but commercial use requires a license.
@@ -143,13 +149,13 @@ php artisan bal:install --preset=full
 - **Vite Integration** - Fast builds and hot reload
 - **PHPUnit Ready** - Comprehensive test coverage
 
-## 🚀 Version 1.5.0 Highlights
+## 🚀 Version 1.5.2 Highlights
 
-- 🧪 **Enhanced Testing Suite** - Comprehensive local testing capabilities
-- 🔒 **Enhanced Security** - Secure authentication and validation
-- 📏 **Consistent Code Quality** - Standardized testing across components
-- ⚡ **Performance Optimized** - Fast builds and efficient testing
-- 🛡️ **CI/CD Ready** - Streamlined testing workflow
+- 🔧 **Breeze Integration Fix** - Resolved CSS/SASS conflicts during installation
+- 🚀 **Seamless Installation** - `--preset=full` now works without errors
+- 📚 **Improved Documentation** - Clear warnings about manual Breeze installation
+- 🛡️ **Conflict Prevention** - Automatic detection and resolution of asset conflicts
+- ⚡ **Better Error Handling** - Clear guidance when installation issues occur
 
 ## 📞 Support & Resources
 

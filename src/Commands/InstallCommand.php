@@ -631,6 +631,15 @@ class InstallCommand extends Command
         // Install Breeze with Blade (we'll modify for Bootstrap)
         try {
             $this->info('🎨 Setting up Breeze authentication...');
+
+            // Ensure CSS directory exists temporarily for Breeze installation
+            $cssPath = resource_path('css');
+            if (!$this->files->isDirectory($cssPath)) {
+                $this->files->ensureDirectoryExists($cssPath);
+                // Create a temporary CSS file for Breeze to copy over
+                $this->files->put(resource_path('css/app.css'), '/* Temporary file for Breeze installation */');
+            }
+
             $this->call('breeze:install', ['stack' => 'blade', '--no-interaction' => true]);
 
             $this->info('🔄 Replacing Tailwind with Bootstrap...');
@@ -663,10 +672,9 @@ class InstallCommand extends Command
             $this->info('✅ Breeze configured with Bootstrap successfully');
         } catch (\Exception $e) {
             $this->warn('⚠️  Breeze installation encountered an issue.');
-            $this->warn('You can run it manually after installation:');
-            $this->line('  php artisan breeze:install blade');
-            $this->line('  npm uninstall tailwindcss postcss autoprefixer');
-            $this->line('  npm install bootstrap @popperjs/core alpinejs');
+            $this->warn('BAL Kit will continue with its own authentication system.');
+            $this->comment('Note: Do not run "php artisan breeze:install" manually as it conflicts with BAL Kit\'s SASS setup.');
+            $this->comment('If you need authentication, BAL Kit provides its own complete authentication system.');
         }
 
         // ALWAYS install BAL Kit components regardless of Breeze success/failure
@@ -737,9 +745,9 @@ class InstallCommand extends Command
         $this->files->append($routesPath, $routes);
 
         $this->info('💡 Authentication routes template added to routes/web.php');
-        $this->info('📖 For full authentication, install Laravel Breeze:');
-        $this->line('   composer require laravel/breeze --dev');
-        $this->line('   php artisan breeze:install blade');
+        $this->info('📖 For full authentication, use BAL Kit with --preset=full:');
+        $this->line('   php artisan bal:install --preset=full');
+        $this->comment('Note: Do not use "php artisan breeze:install" directly as it conflicts with BAL Kit\'s SASS setup.');
     }
 
     /**

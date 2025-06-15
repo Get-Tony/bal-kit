@@ -13,12 +13,12 @@ class Version
     /**
      * The current version of BAL Kit.
      */
-    public const VERSION = '1.5.1';
+    public const VERSION = '1.5.2';
 
     /**
      * The version constraint for Composer installations.
      */
-    public const CONSTRAINT = '^1.5.1';
+    public const CONSTRAINT = '^1.5.2';
 
     /**
      * The release date of the current version.
@@ -28,7 +28,7 @@ class Version
     /**
      * The version name/codename.
      */
-    public const CODENAME = 'Streamlined Testing';
+    public const CODENAME = 'Breeze Integration Fix';
 
     /**
      * Get the current version.
